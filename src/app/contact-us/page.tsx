@@ -52,9 +52,9 @@ const ContactUs: React.FC = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-block px-4 py-2 bg-yellow-500 text-black text-sm font-bold rounded-full uppercase tracking-wider mb-6">Contact Us</span>
             <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
-              Let's Build Something<span className="block text-yellow-400">Amazing Together</span>
+               Let&apos;s Build Something<span className="block text-yellow-400">Amazing Together</span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">Have a project in mind? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">Have a project in mind? We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.</p>
           </motion.div>
         </div>
       </motion.section>
@@ -67,7 +67,7 @@ const ContactUs: React.FC = () => {
                 <div className="p-3 bg-yellow-500 rounded-xl"><MessageSquare className="text-white" size={24} /></div>
                 <div>
                   <h2 className="text-3xl font-black text-gray-900">Send us a Message</h2>
-                  <p className="text-gray-600">Fill out the form below and we'll get back to you</p>
+                  <p className="text-gray-600">Fill out the form below and will get back to you</p>
                 </div>
               </div>
 
@@ -77,7 +77,7 @@ const ContactUs: React.FC = () => {
                     <CheckCircle2 className="text-green-600" size={40} />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
-                  <p className="text-gray-600">We'll get back to you within 24 hours.</p>
+                  <p className="text-gray-600">We&apos;ll get back to you within 24 hours.</p>
                 </motion.div>
               ) : (
                 <div className="space-y-6">
@@ -143,7 +143,7 @@ const ContactUs: React.FC = () => {
               { icon: <Mail size={28} />, title: 'Email Us', details: ['info@diwebz.com', 'support@diwebz.com'], description: 'Send us an email anytime!' },
               { icon: <Phone size={28} />, title: 'Call Us', details: ['+1 (555) 123-4567', '+1 (555) 987-6543'], description: 'Mon-Fri from 9am to 6pm' },
               { icon: <MapPin size={28} />, title: 'Visit Us', details: ['123 Business Street', 'New York, NY 10001, USA'], description: 'Come visit our office' },
-              { icon: <Clock size={28} />, title: 'Working Hours', details: ['Monday - Friday: 9am - 6pm', 'Saturday: 10am - 4pm'], description: 'We\'re here to help!' },
+              { icon: <Clock size={28} />, title: 'Working Hours', details: ['Monday - Friday: 9am - 6pm', 'Saturday: 10am - 4pm'], description: 'We&apos;re here to help!' },
             ].map((info, index) => (
               <motion.div key={index} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 + index * 0.1 }} whileHover={{ y: -4 }} className="bg-white border-2 border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:border-yellow-500">
                 <div className="flex items-start gap-4">
@@ -177,7 +177,7 @@ const ContactUs: React.FC = () => {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="mb-16">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-black text-gray-900 mb-4">Why <span className="text-yellow-600">Choose Us?</span></h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">We're committed to providing exceptional service and support to all our clients</p>
+            <p className="text-gray-600 max-w-2xl mx-auto">We&apos;re committed to providing exceptional service and support to all our clients</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
@@ -197,7 +197,7 @@ const ContactUs: React.FC = () => {
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-3xl p-12 text-center shadow-2xl">
           <h2 className="text-4xl font-black text-black mb-4">Ready to Start Your Project?</h2>
-          <p className="text-lg text-gray-900 mb-8 max-w-2xl mx-auto">Let's discuss how we can help transform your ideas into reality</p>
+          <p className="text-lg text-gray-900 mb-8 max-w-2xl mx-auto">Let&apos;s discuss how we can help transform your ideas into reality</p>
           <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-8 py-4 bg-black text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2">
             Schedule a Free Consultation<ArrowRight size={20} />
           </motion.button>

@@ -15,6 +15,12 @@ const DpWebzCursor: React.FC<DpWebzCursorProps> = ({ disabled = false }) => {
   const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
+  
+  // Add the trail spring hooks here (at the top level)
+  const trailSpringConfig = { damping: 30, stiffness: 200, mass: 0.8 };
+  const trailXSpring = useSpring(cursorX, trailSpringConfig);
+  const trailYSpring = useSpring(cursorY, trailSpringConfig);
+  
   const interactiveRefs = useRef<NodeListOf<Element> | null>(null);
 
   useEffect(() => {
@@ -67,7 +73,7 @@ const DpWebzCursor: React.FC<DpWebzCursorProps> = ({ disabled = false }) => {
       `}</style>
       {/* Main cursor - follows immediately */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-9999 mix-blend-difference"
         style={{
           x: cursorX,
           y: cursorY,
@@ -86,7 +92,7 @@ const DpWebzCursor: React.FC<DpWebzCursorProps> = ({ disabled = false }) => {
       </motion.div>
       {/* Outer ring - follows with spring delay */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9998]"
+        className="fixed top-0 left-0 pointer-events-none z-9998"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
@@ -118,12 +124,12 @@ const DpWebzCursor: React.FC<DpWebzCursorProps> = ({ disabled = false }) => {
           />
         </motion.div>
       </motion.div>
-      {/* Trail effect */}
+      {/* Trail effect - using the pre-defined springs */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9997]"
+        className="fixed top-0 left-0 pointer-events-none z-9997"
         style={{
-          x: useSpring(cursorX, { damping: 30, stiffness: 200, mass: 0.8 }),
-          y: useSpring(cursorY, { damping: 30, stiffness: 200, mass: 0.8 }),
+          x: trailXSpring,
+          y: trailYSpring,
         }}
       >
         <div className="relative -translate-x-1/2 -translate-y-1/2">

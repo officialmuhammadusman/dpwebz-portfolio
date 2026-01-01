@@ -6,7 +6,7 @@ import { textBlocks } from "./hero.data";
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 
-export default function HeroSection(): JSX.Element {
+export default function HeroSection() {
   const [current, setCurrent] = useState<number>(0);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function HeroSection(): JSX.Element {
               whileTap={{ scale: 0.95 }}
               className="group px-8 py-4 bg-white text-black font-bold rounded-lg text-lg hover:shadow-xl hover:shadow-white/20 transition-all flex items-center justify-center gap-2"
             >
-              Let's Talk Business
+              Let&apos;s Talk Business
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </motion.a>
 
@@ -147,7 +147,7 @@ export default function HeroSection(): JSX.Element {
 //               whileTap={{ scale: 0.95 }}
 //               className="group px-8 py-4 bg-white text-black font-bold rounded-lg text-lg hover:shadow-xl hover:shadow-white/20 transition-all flex items-center justify-center gap-2"
 //             >
-//               Let's Talk Business
+//               Let&apos;s Talk Business
 //               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
 //             </motion.a>
 

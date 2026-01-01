@@ -1,5 +1,6 @@
 'use client';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
+import Image from 'next/image';
 import {
   Search, Palette, TestTube, Rocket, FileText, Code, Star, BookOpen, Database, Cpu, Zap, Shield, Check,
   ChevronLeft, ChevronRight, ArrowRight
@@ -255,7 +256,20 @@ const technologies = [
     color: 'from-red-500 to-red-600'
   }
 ];
-function FullWidthHeroSlider({ process }: { process: any }) {
+interface ProcessData {
+  heroSlides: Array<{
+    image: string;
+    title: string[];
+    subtitle: string[];
+  }>;
+  stats: Array<{
+    number: string;
+    label: string;
+  }>;
+  color: string;
+}
+
+function FullWidthHeroSlider({ process }: { process: ProcessData }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   useEffect(() => {
     const timer = setInterval(() => {
@@ -276,10 +290,12 @@ function FullWidthHeroSlider({ process }: { process: any }) {
           exit="exit"
           className="absolute inset-0"
         >
-          <img
+          <Image
             src={process.heroSlides[currentSlide].image}
             alt="Hero"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         </motion.div>
@@ -320,7 +336,7 @@ function FullWidthHeroSlider({ process }: { process: any }) {
                 variants={subtitleVariants}
                 className="flex gap-8 pt-6"
               >
-                {process.stats.map((stat: any, i: number) => (
+                {process.stats.map((stat, i: number) => (
                   <div key={i}>
                     <div className="text-3xl md:text-4xl font-black text-white mb-1">
                       {stat.number}
@@ -357,7 +373,7 @@ function FullWidthHeroSlider({ process }: { process: any }) {
         <ChevronRight className="text-white" size={28} />
       </button>
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
-        {process.heroSlides.map((_: any, i: number) => (
+        {process.heroSlides.map((_, i: number) => (
           <button
             key={i}
             onClick={() => setCurrentSlide(i)}
@@ -370,7 +386,20 @@ function FullWidthHeroSlider({ process }: { process: any }) {
     </div>
   );
 }
-function ProcessSpecificContent({ processKey, process }: { processKey: string; process: any }) {
+interface ProcessContent {
+  color: string;
+  heroSlides: Array<{
+    image: string;
+    title: string[];
+    subtitle: string[];
+  }>;
+  stats: Array<{
+    number: string;
+    label: string;
+  }>;
+}
+
+function ProcessSpecificContent({ processKey, process }: { processKey: string; process: ProcessContent | null }) {
   if (!process) return null;
   return (
     <div className="max-w-7xl mx-auto px-4">
@@ -452,7 +481,7 @@ function ProcessSpecificContent({ processKey, process }: { processKey: string; p
           >
             <h3 className="text-3xl font-black mb-4">Ready to start your project?</h3>
             <p className="mb-8 text-indigo-100 text-lg">
-              Let's discuss how our process can bring your vision to life.
+              Let&apos;s discuss how our process can bring your vision to life.
             </p>
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
@@ -615,7 +644,7 @@ function ProcessSpecificContent({ processKey, process }: { processKey: string; p
           >
             <h3 className="text-3xl font-black mb-4">Ready to Build with Cutting-Edge Tech?</h3>
             <p className="mb-8 text-emerald-100 text-lg">
-              Let's discuss the best technology stack for your project.
+              Let&apos;s discuss the best technology stack for your project.
             </p>
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
@@ -638,7 +667,7 @@ function ProcessSpecificContent({ processKey, process }: { processKey: string; p
         <div className="text-center">
           <h3 className="text-3xl font-black mb-4 text-gray-900">Ready to Transform Your Business?</h3>
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Let's discuss how DPWebz can help you achieve your digital goals with innovative solutions.
+            Let&apos;s discuss how DPWebz can help you achieve your digital goals with innovative solutions.
           </p>
           <motion.a
             href="#connect"

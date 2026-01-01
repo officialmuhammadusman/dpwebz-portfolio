@@ -13,12 +13,12 @@ export default function CallToActionSection() {
   const [submitted, setSubmitted] = useState(false);
   const [activeTab, setActiveTab] = useState("form");
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);
     setTimeout(() => {
@@ -82,7 +82,7 @@ export default function CallToActionSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto"
           >
-            Let's discuss your vision and build something amazing together
+            Let&apos;s discuss your vision and build something amazing together
           </motion.p>
         </motion.div>
 
@@ -245,7 +245,7 @@ export default function CallToActionSection() {
                         onChange={handleInputChange}
                         required
                         placeholder="Tell us about your project..."
-                        rows="4"
+                        rows={4}
                         className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all resize-none"
                       />
                     </div>
@@ -266,7 +266,7 @@ export default function CallToActionSection() {
                         animate={{ opacity: 1, scale: 1 }}
                         className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-700 font-medium"
                       >
-                        ✓ Message sent! We'll contact you soon.
+                        ✓ Message sent! We&apos;ll contact you soon.
                       </motion.div>
                     )}
                   </motion.form>

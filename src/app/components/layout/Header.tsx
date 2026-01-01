@@ -1018,7 +1018,7 @@ export default function Header() {
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            Let's Talk Business
+            Let&apos;s Talk Business
           </motion.button>
           <motion.button
             onClick={handlePortfolioClick}
@@ -1275,7 +1275,7 @@ export default function Header() {
                   className="block w-full bg-[#fec107] text-black px-6 py-3 rounded-full font-semibold text-center hover:bg-[#eab308]"
                   whileTap={{ scale: 0.95 }}
                 >
-                  Let's Talk Business
+                  Let&apos;s Talk Business
                 </motion.button>
                 <motion.button
                   onClick={handlePortfolioClick}

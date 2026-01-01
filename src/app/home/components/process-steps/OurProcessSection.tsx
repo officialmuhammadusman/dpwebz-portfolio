@@ -1,8 +1,24 @@
 'use client'
 import { motion } from "framer-motion";
 import { Lightbulb, Palette, Code2, Rocket, ArrowRight, CheckCircle2 } from "lucide-react";
+import React from 'react';
 
-const processSteps = [
+interface ProcessStepType {
+  id: number;
+  title: string;
+  description: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  details: string[];
+  color: string;
+}
+
+interface ProcessStepProps {
+  step: ProcessStepType;
+  index: number;
+  total: number;
+}
+
+const processSteps: ProcessStepType[] = [
   {
     id: 1,
     title: "Discovery",
@@ -37,7 +53,7 @@ const processSteps = [
   },
 ];
 
-function ProcessStep({ step, index, total }) {
+function ProcessStep({ step, index, total }: ProcessStepProps) {
   const IconComponent = step.icon;
   const isLast = index === total - 1;
 
@@ -335,7 +351,7 @@ export default function OurProcessSection() {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto"
             >
-              Let's start your project with our proven process and turn your ideas into reality.
+              Let&apos;s start your project with our proven process and turn your ideas into reality.
             </motion.p>
 
             <motion.div

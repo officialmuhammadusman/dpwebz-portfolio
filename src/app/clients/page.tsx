@@ -1,12 +1,60 @@
 'use client';
+
+import Image from 'next/image';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import {
-  Store, Rocket, Heart, Building2, User, Users, TrendingUp,
-  Building, Lightbulb, Zap, Target, Globe, ChevronRight,
+  Building2, TrendingUp, Lightbulb, ChevronRight,
   Check, ArrowRight, ChevronLeft, Award, CheckCircle2
 } from 'lucide-react';
 import ClientTestimonialsSection from '@/app/home/components/testimonials/ClientTestimonialsSection';
 import { useState, useEffect } from 'react';
+
+// Define Lucide icon type
+type LucideIcon = React.ForwardRefExoticComponent<
+  Omit<React.SVGProps<SVGSVGElement>, 'ref'> & 
+  React.RefAttributes<SVGSVGElement>
+>;
+
+interface HeroSlide {
+  image: string;
+  title: string[];
+  subtitle: string[];
+}
+
+interface Stat {
+  number: string;
+  label: string;
+}
+
+interface CaseStudy {
+  title: string;
+  client: string;
+  industry: string;
+  challenge: string;
+  solution: string;
+  results: string[];
+  image: string;
+  testimonial: string;
+  author: string;
+}
+
+interface CategoryStats {
+  [key: string]: string;
+}
+
+interface Category {
+  name: string;
+  description: string;
+  image: string;
+  solutions: string[];
+  stats: CategoryStats;
+}
+
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
 // Animation variants
 const titleVariants: Variants = {
   hidden: { opacity: 0, x: -50, filter: "blur(8px)" },
@@ -23,6 +71,7 @@ const titleVariants: Variants = {
     transition: { duration: 0.4, ease: [0.55, 0.085, 0.68, 0.53] }
   }
 };
+
 const subtitleVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -32,6 +81,7 @@ const subtitleVariants: Variants = {
   },
   exit: { opacity: 0, y: -10, transition: { duration: 0.3 } }
 };
+
 const imageVariants: Variants = {
   hidden: { opacity: 0, scale: 1.1 },
   visible: {
@@ -41,6 +91,7 @@ const imageVariants: Variants = {
   },
   exit: { opacity: 0, scale: 0.95, transition: { duration: 0.5 } }
 };
+
 const clientData = {
   'industries': {
     title: 'Industries We Serve',
@@ -52,7 +103,7 @@ const clientData = {
       {
         image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1920&q=80',
         title: ['Transform Your Industry', 'With Expert Solutions'],
-        subtitle: ['Specialized expertise tailored to your', 'sector\'s unique challenges and opportunities']
+        subtitle: ['Specialized expertise tailored to your', "sector's unique challenges and opportunities"]
       },
       {
         image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80',
@@ -127,7 +178,7 @@ const clientData = {
     faqs: [
       {
         question: 'Do you have experience in my industry?',
-        answer: 'We\'ve worked with clients across 15+ industries. During discovery, we assess your specific needs and match you with team members who have relevant industry experience.'
+        answer: "We've worked with clients across 15+ industries. During discovery, we assess your specific needs and match you with team members who have relevant industry experience."
       },
       {
         question: 'How do you handle industry-specific regulations?',
@@ -231,15 +282,15 @@ const clientData = {
         answer: 'Yes! We offer flexible payment terms including milestone-based payments, monthly retainers, and phased project delivery to match your cash flow.'
       },
       {
-        question: 'How do I know which package is right for me?',
-        answer: 'Schedule a free consultation where we\'ll assess your needs, budget, and goals to recommend the perfect solution for your business size and stage.'
+        question: "How do I know which package is right for me?",
+        answer: "Schedule a free consultation where we'll assess your needs, budget, and goals to recommend the perfect solution for your business size and stage."
       }
     ]
   },
   'solutions': {
     title: 'Transformative Solutions',
     tagline: 'Strategic Approaches for Your Goals',
-    description: 'Whether you\'re launching, scaling, transforming, or expanding - we have the right solution for your journey.',
+    description: "Whether you're launching, scaling, transforming, or expanding - we have the right solution for your journey.",
     icon: Lightbulb,
     color: 'from-green-600 to-emerald-600',
     heroSlides: [
@@ -333,17 +384,23 @@ const clientData = {
       }
     ]
   }
-};
-function FullWidthHeroSlider({ client }: { client: any }) {
+} as const;
+
+type ClientDataKey = keyof typeof clientData;
+
+function FullWidthHeroSlider({ client }: { client: typeof clientData[ClientDataKey] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % client.heroSlides.length);
     }, 6000);
     return () => clearInterval(timer);
   }, [client.heroSlides.length]);
+
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % client.heroSlides.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + client.heroSlides.length) % client.heroSlides.length);
+
   return (
     <div className="relative w-full h-[600px] md:h-[700px] overflow-hidden">
       <AnimatePresence mode="wait">
@@ -355,14 +412,17 @@ function FullWidthHeroSlider({ client }: { client: any }) {
           exit="exit"
           className="absolute inset-0"
         >
-          <img
+          <Image
             src={client.heroSlides[currentSlide].image}
             alt="Hero"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
         </motion.div>
       </AnimatePresence>
+
       <div className="relative h-full max-w-7xl mx-auto px-4 flex items-center">
         <div className="max-w-3xl">
           <AnimatePresence mode="wait">
@@ -388,6 +448,7 @@ function FullWidthHeroSlider({ client }: { client: any }) {
                   </motion.h1>
                 ))}
               </div>
+
               <motion.div variants={subtitleVariants} className="space-y-2">
                 {client.heroSlides[currentSlide].subtitle.map((line: string, i: number) => (
                   <p key={i} className="text-base md:text-lg lg:text-xl text-gray-200">
@@ -395,11 +456,12 @@ function FullWidthHeroSlider({ client }: { client: any }) {
                   </p>
                 ))}
               </motion.div>
+
               <motion.div
                 variants={subtitleVariants}
                 className="flex gap-8 pt-6"
               >
-                {client.stats.map((stat: any, i: number) => (
+                {client.stats.map((stat, i: number) => (
                   <div key={i}>
                     <div className="text-3xl md:text-4xl font-black text-white mb-1">
                       {stat.number}
@@ -408,6 +470,7 @@ function FullWidthHeroSlider({ client }: { client: any }) {
                   </div>
                 ))}
               </motion.div>
+
               <motion.div variants={subtitleVariants} className="pt-4">
                 <motion.a
                   href="#contact"
@@ -423,6 +486,7 @@ function FullWidthHeroSlider({ client }: { client: any }) {
           </AnimatePresence>
         </div>
       </div>
+
       <button
         onClick={prevSlide}
         className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/20 transition z-10"
@@ -435,8 +499,9 @@ function FullWidthHeroSlider({ client }: { client: any }) {
       >
         <ChevronRight className="text-white" size={28} />
       </button>
+
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
-        {client.heroSlides.map((_: any, i: number) => (
+        {client.heroSlides.map((_, i: number) => (
           <button
             key={i}
             onClick={() => setCurrentSlide(i)}
@@ -449,13 +514,16 @@ function FullWidthHeroSlider({ client }: { client: any }) {
     </div>
   );
 }
+
 function ClientSpecificContent({ clientKey }: { clientKey: string }) {
-  const client = clientData[clientKey as keyof typeof clientData];
+  const client = clientData[clientKey as ClientDataKey];
+
   if (!client) return null;
+
   return (
     <div className="max-w-7xl mx-auto px-4">
       {/* Featured Case Study */}
-      <div className="my-20 bg-gradient-to-br from-gray-50 to-white p-8 md:p-12 rounded-2xl border border-gray-200">
+      <div className="my-20 bg-linear-to-br from-gray-50 to-white p-8 md:p-12 rounded-2xl border border-gray-200">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -467,7 +535,7 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className={`inline-block px-4 py-2 bg-gradient-to-r ${client.color} text-white rounded-full text-sm font-bold mb-4`}
+              className={`inline-block px-4 py-2 bg-linear-to-r ${client.color} text-white rounded-full text-sm font-bold mb-4`}
             >
               Featured Success Story
             </motion.span>
@@ -489,10 +557,13 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              <img
+              <Image
                 src={client.featuredCaseStudy.image}
                 alt={client.featuredCaseStudy.title}
+                width={1200}
+                height={768}
                 className="w-full h-96 object-cover rounded-xl shadow-lg"
+                priority
               />
             </motion.div>
             <motion.div
@@ -521,7 +592,7 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
                       transition={{ delay: 0.4 + i * 0.05 }}
                       className="flex items-start gap-2"
                     >
-                      <CheckCircle2 className="text-green-500 flex-shrink-0 mt-1" size={18} />
+                      <CheckCircle2 className="text-green-500 shrink-0 mt-1" size={18} />
                       <span className="text-gray-700 font-medium text-sm">{result}</span>
                     </motion.div>
                   ))}
@@ -534,13 +605,14 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
                 transition={{ delay: 0.6 }}
                 className="bg-white p-6 rounded-xl border-l-4 border-[#fec107]"
               >
-                <p className="text-gray-700 italic mb-3">"{client.featuredCaseStudy.testimonial}"</p>
+                <p className="text-gray-700 italic mb-3">{client.featuredCaseStudy.testimonial}</p>
                 <p className="text-sm font-bold text-gray-900">— {client.featuredCaseStudy.author}</p>
               </motion.div>
             </motion.div>
           </div>
         </motion.div>
       </div>
+
       {/* Categories/Solutions Breakdown */}
       <div className="my-20">
         <motion.div
@@ -559,7 +631,7 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
           </p>
         </motion.div>
         <div className="grid md:grid-cols-2 gap-8">
-          {client.categories.map((category: any, i: number) => (
+          {client.categories.map((category, i: number) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
@@ -570,18 +642,22 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
               className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-[#fec107] hover:shadow-xl transition-all"
             >
               <div className="relative h-48 overflow-hidden">
-                <motion.img
-                  src={category.image}
-                  alt={category.name}
-                  className="w-full h-full object-cover"
+                <motion.div
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.6 }}
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t from-black/60 to-transparent`} />
+                >
+                  <Image
+                    src={category.image}
+                    alt={category.name}
+                    fill
+                    className="object-cover"
+                  />
+                </motion.div>
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex gap-2">
                   {Object.entries(category.stats).map(([key, value]) => (
                     <div key={key} className="bg-white/90 backdrop-blur px-3 py-1 rounded-lg flex-1 text-center">
-                      <div className="text-lg font-black text-gray-900">{value as string}</div>
+                      <div className="text-lg font-black text-gray-900">{value}</div>
                       <div className="text-xs text-gray-600 capitalize">{key}</div>
                     </div>
                   ))}
@@ -593,7 +669,7 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
                 <div className="space-y-2">
                   {category.solutions.map((solution: string, j: number) => (
                     <div key={j} className="flex items-center gap-2 text-sm">
-                      <Check className="text-green-500 flex-shrink-0" size={16} />
+                      <Check className="text-green-500 shrink-0" size={16} />
                       <span className="text-gray-700">{solution}</span>
                     </div>
                   ))}
@@ -603,8 +679,9 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
           ))}
         </div>
       </div>
+
       {/* Benefits Section */}
-      <div className="my-20 bg-gradient-to-br from-gray-50 to-white p-12 rounded-2xl border border-gray-200">
+      <div className="my-20 bg-linear-to-br from-gray-50 to-white p-12 rounded-2xl border border-gray-200">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -621,15 +698,17 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
                 transition={{ delay: i * 0.05 }}
                 className="flex items-center gap-3 p-4 bg-white rounded-lg border border-gray-200"
               >
-                <Award size={18} className="text-[#fec107] flex-shrink-0" />
+                <Award size={18} className="text-[#fec107] shrink-0" />
                 <span className="font-medium text-gray-900 text-sm">{benefit}</span>
               </motion.div>
             ))}
           </div>
         </motion.div>
       </div>
+
       {/* Testimonials Section */}
       <ClientTestimonialsSection />
+
       {/* FAQ Section */}
       <div className="my-20">
         <motion.div
@@ -642,7 +721,7 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
           <p className="text-gray-600">Everything you need to know</p>
         </motion.div>
         <div className="max-w-3xl mx-auto space-y-4">
-          {client.faqs.map((faq: any, i: number) => (
+          {client.faqs.map((faq, i: number) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
@@ -657,16 +736,17 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
           ))}
         </div>
       </div>
+
       {/* CTA Section */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className={`bg-gradient-to-r ${client.color} text-white rounded-2xl p-12 text-center my-20`}
+        className={`bg-linear-to-r ${client.color} text-white rounded-2xl p-12 text-center my-20`}
       >
         <h2 className="text-3xl md:text-4xl font-black mb-4">Ready to Get Started?</h2>
         <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-          Let's discuss your needs and create a solution that drives real results.
+          Let&apos;s discuss your needs and create a solution that drives real results.
         </p>
         <motion.a
           href="#contact"
@@ -681,30 +761,35 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
     </div>
   );
 }
+
 export default function WhoWeHelpPage() {
-  const [activeTab, setActiveTab] = useState('industries');
+  const [activeTab, setActiveTab] = useState<ClientDataKey>('industries');
+
   const tabs = [
-    { key: 'industries', label: 'Industries', icon: Building2 },
-    { key: 'business-size', label: 'Business Size', icon: TrendingUp },
-    { key: 'solutions', label: 'Solutions', icon: Lightbulb },
+    { key: 'industries' as const, label: 'Industries', icon: Building2 },
+    { key: 'business-size' as const, label: 'Business Size', icon: TrendingUp },
+    { key: 'solutions' as const, label: 'Solutions', icon: Lightbulb },
   ];
+
   // Sync with URL hash
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
       if (hash && clientData.hasOwnProperty(hash)) {
-        setActiveTab(hash);
+        setActiveTab(hash as ClientDataKey);
       }
     };
     handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
-  const handleTabClick = (key: string) => {
+
+  const handleTabClick = (key: ClientDataKey) => {
     setActiveTab(key);
     window.history.replaceState(null, '', `#${key}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
@@ -719,6 +804,7 @@ export default function WhoWeHelpPage() {
           <FullWidthHeroSlider client={clientData[activeTab]} />
         </motion.div>
       </AnimatePresence>
+
       {/* Tab Navigation */}
       <div className="bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4">
@@ -744,6 +830,7 @@ export default function WhoWeHelpPage() {
               );
             })}
           </div>
+
           {/* Mobile */}
           <div className="sm:hidden flex justify-center gap-0">
             {tabs.map((tab) => {
@@ -767,6 +854,7 @@ export default function WhoWeHelpPage() {
           </div>
         </div>
       </div>
+
       {/* Content */}
       <AnimatePresence mode="wait">
         <motion.div

@@ -2,8 +2,8 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import {
-  Star,
   ChevronLeft,
   ChevronRight,
   Quote,
@@ -11,6 +11,7 @@ import {
   Rocket,
   Stethoscope,
   Home,
+  Star,
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -179,15 +180,17 @@ export default function ClientTestimonialsSection() {
                     </div>
 
                     <p className="text-xl lg:text-2xl text-gray-800 leading-relaxed mb-10 font-medium">
-                      "{activeTestimonial.text}"
+                      &ldquo;{activeTestimonial.text}&rdquo;
                     </p>
 
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-5">
                         <div className="relative w-16 h-16 rounded-full overflow-hidden ring-4 ring-blue-100">
-                          <img
+                          <Image
                             src={activeTestimonial.image}
                             alt={activeTestimonial.name}
+                            width={64}
+                            height={64}
                             className="w-full h-full object-cover"
                           />
                         </div>

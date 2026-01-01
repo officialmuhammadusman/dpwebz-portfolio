@@ -4,7 +4,6 @@ import {
   ChevronDown,
   X,
   Filter,
-  Star,
   ArrowRight,
   Sparkles,
   Code,
@@ -20,6 +19,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
+import Image from 'next/image';
 
 // Animation variants
 const titleVariants: Variants = {
@@ -108,9 +108,9 @@ interface HeroSlide {
 const PortfolioShowcase: React.FC = () => {
   const [expandedFilters, setExpandedFilters] = useState<Record<string, boolean>>({});
   const [selectedFilters, setSelectedFilters] = useState<Record<string, boolean>>({});
-  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   // Hero slider data
   const heroSlides: HeroSlide[] = [
@@ -137,21 +137,63 @@ const PortfolioShowcase: React.FC = () => {
     }
   ];
 
-  // Auto-advance slider
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-  };
+  // FIX: Wrap allProjects in useMemo to prevent recreation on every render (fixes exhaustive-deps warning)
+  const allProjects = useMemo<Project[]>(() => [
+    { id: 1, mainService: 'graphic-design', subService: 'logo', title: 'Tech Startup Brand Identity', client: 'AI Solutions Inc.', image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=400&fit=crop', description: 'Complete brand identity with logo, guidelines and color palette', results: ['Award-winning design', 'Brand consistency', '95% satisfaction'], year: 2024, rating: 5 },
+    { id: 2, mainService: 'graphic-design', subService: 'logo', title: 'Luxury Retail Rebranding', client: 'Premium Fashion House', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Premium brand transformation for high-end retail', results: ['60% brand recognition', 'Premium positioning', 'Global rollout'], year: 2024, rating: 5 },
+    { id: 3, mainService: 'graphic-design', subService: 'logo', title: 'Non-Profit Organization Logo', client: 'Global Education NGO', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Meaningful visual identity for educational impact', results: ['50% donation increase', 'Community reach', '12 countries'], year: 2023, rating: 5 },
+    { id: 4, mainService: 'graphic-design', subService: 'ui-ux', title: 'Mobile Banking App UI/UX', client: 'FinTech Startup', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=400&fit=crop', description: 'Complete user interface design with interactive prototypes', results: ['130 design screens', '4.8★ rating', 'Accessible design'], year: 2024, rating: 5 },
+    { id: 5, mainService: 'graphic-design', subService: 'ui-ux', title: 'SaaS Dashboard Design System', client: 'Analytics Platform', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Enterprise design system with 200+ components', results: ['Design to dev', '40% faster builds', 'Component library'], year: 2024, rating: 5 },
+    { id: 6, mainService: 'graphic-design', subService: 'ui-ux', title: 'E-Learning Platform UX', client: 'Online Education Provider', image: 'https://images.unsplash.com/photo-1580828343555-20166e46e81c?w=500&h=400&fit=crop', description: 'UX overhaul with user research and testing', results: ['45% engagement ↑', '60% bounce ↓', 'WCAG compliant'], year: 2023, rating: 5 },
+    { id: 7, mainService: 'graphic-design', subService: 'social', title: 'Social Media Campaign Suite', client: 'Fashion E-Commerce', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: '500+ branded graphics for multi-platform campaign', results: ['2M+ impressions', '18% engagement', '500+ assets'], year: 2024, rating: 5 },
+    { id: 8, mainService: 'graphic-design', subService: 'social', title: 'Content Creator Branding', client: 'Lifestyle Influencer', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Complete visual identity package with templates', results: ['Brand aesthetics', '250+ templates', '500K followers'], year: 2024, rating: 5 },
+    { id: 9, mainService: 'graphic-design', subService: 'social', title: 'Environmental Awareness Campaign', client: 'Environmental NGO', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Viral social graphics for awareness campaign', results: ['3M+ reach', '250K shares', '40% goal exceed'], year: 2023, rating: 5 },
+    { id: 10, mainService: 'web-design', subService: 'custom-web', title: 'Enterprise SaaS Platform', client: 'B2B Software Company', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Full-stack MERN with real-time collaboration', results: ['10K+ users', 'Real-time sync', 'Enterprise scale'], year: 2024, rating: 5 },
+    { id: 11, mainService: 'web-design', subService: 'custom-web', title: 'Laravel E-Commerce Marketplace', client: 'Multi-Vendor Platform', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Multi-vendor marketplace with payment integration', results: ['500+ vendors', '1M+ transactions', '99.9% uptime'], year: 2024, rating: 5 },
+    { id: 12, mainService: 'web-design', subService: 'custom-web', title: 'Healthcare Management Portal', client: 'Multi-Specialty Hospital', image: 'https://images.unsplash.com/photo-1576091160550-112173f31c77?w=500&h=400&fit=crop', description: 'HIPAA-compliant patient management system', results: ['50K+ patients', 'HIPAA certified', 'Telemedicine'], year: 2023, rating: 5 },
+    { id: 13, mainService: 'web-design', subService: 'wordpress', title: 'Corporate Website with CMS', client: 'Fortune 500 Company', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Custom WordPress with multi-language support', results: ['Custom theme', 'Multi-language', '90+ speed'], year: 2024, rating: 5 },
+    { id: 14, mainService: 'web-design', subService: 'wordpress', title: 'Agency Portfolio Website', client: 'Creative Design Agency', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Beautiful portfolio with custom post types', results: ['Portfolio design', 'Inquiries +300%', 'Advanced filter'], year: 2023, rating: 5 },
+    { id: 15, mainService: 'web-design', subService: 'wordpress', title: 'Digital News Portal', client: 'Digital Media Company', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'High-traffic news portal with advanced search', results: ['5M+ visitors', 'Subscription system', 'Advanced search'], year: 2024, rating: 5 },
+    { id: 16, mainService: 'web-design', subService: 'saas', title: 'AI Tool SaaS Landing', client: 'AI Startup', image: 'https://images.unsplash.com/photo-1620712014215-7b16038111c0?w=500&h=400&fit=crop', description: 'High-converting landing with interactive demo', results: ['35% conversion', '15K sign-ups', 'International'], year: 2024, rating: 5 },
+    { id: 17, mainService: 'web-design', subService: 'saas', title: 'Project Management SaaS', client: 'Productivity Software', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Team collaboration platform with real-time updates', results: ['50K+ teams', 'Real-time collab', '99.99% uptime'], year: 2024, rating: 5 },
+    { id: 18, mainService: 'web-design', subService: 'saas', title: 'Marketing Automation Platform', client: 'B2B Marketing Tool', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Workflow builder with analytics dashboard', results: ['Enterprise clients', '100+ integrations', 'Automation'], year: 2023, rating: 5 },
+    { id: 19, mainService: 'app-dev', subService: 'native', title: 'Mobile Banking Application', client: 'FinTech Startup', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=400&fit=crop', description: 'Native iOS & Android with biometric security', results: ['100K+ downloads', 'PCI-DSS compliant', '4.8★ rating'], year: 2024, rating: 5 },
+    { id: 20, mainService: 'app-dev', subService: 'native', title: 'Fitness Tracking Application', client: 'Wellness Company', image: 'https://images.unsplash.com/photo-1580828343555-20166e46e81c?w=500&h=400&fit=crop', description: 'Health app with wearable integration', results: ['500K+ downloads', 'Apple Health', 'Wearables'], year: 2023, rating: 5 },
+    { id: 21, mainService: 'app-dev', subService: 'native', title: 'Real Estate Marketplace App', client: 'Property Management', image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&h=400&fit=crop', description: 'Property search with virtual tours', results: ['250K+ listings', 'Virtual tours', 'Video calls'], year: 2024, rating: 5 },
+    { id: 22, mainService: 'app-dev', subService: 'cross-platform', title: 'Ride-Sharing Application', client: 'Transportation Startup', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Cross-platform with GPS tracking', results: ['1M+ downloads', 'Real-time GPS', 'Payment integration'], year: 2024, rating: 5 },
+    { id: 23, mainService: 'app-dev', subService: 'cross-platform', title: 'E-Learning Mobile App', client: 'Online Education', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Flutter app with offline learning mode', results: ['2M+ students', 'Offline mode', '200+ courses'], year: 2023, rating: 5 },
+    { id: 24, mainService: 'app-dev', subService: 'cross-platform', title: 'Food Delivery App', client: 'Food Tech Company', image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&h=400&fit=crop', description: 'Multi-language food delivery platform', results: ['500K+ restaurants', 'Real-time tracking', 'Multi-language'], year: 2024, rating: 5 },
+    { id: 25, mainService: 'app-dev', subService: 'api', title: 'Multi-Payment Gateway', client: 'E-Commerce Platform', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Stripe, PayPal and local payment methods', results: ['50+ payments', '99.99% success', '$10M+ processed'], year: 2024, rating: 5 },
+    { id: 26, mainService: 'app-dev', subService: 'api', title: 'Third-Party API Ecosystem', client: 'SaaS Platform', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Salesforce, HubSpot, Shopify integration', results: ['100+ integrations', 'Real-time sync', 'Webhook management'], year: 2024, rating: 5 },
+    { id: 27, mainService: 'app-dev', subService: 'api', title: 'Microservices Architecture', client: 'Enterprise Tech', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Docker, Kubernetes scalable backend', results: ['12 microservices', 'Auto-scaling', 'API security'], year: 2023, rating: 5 },
+    { id: 28, mainService: 'ai-automation', subService: 'crm', title: 'Sales Pipeline Automation', client: 'B2B Software', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Salesforce CRM with custom workflows', results: ['70% faster sales', 'Conversions +40%', '50 workflows'], year: 2024, rating: 5 },
+    { id: 29, mainService: 'ai-automation', subService: 'crm', title: 'HubSpot CRM Implementation', client: 'Marketing Agency', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Marketing automation with lead nurturing', results: ['90% automation', 'Leads 3x', 'Custom dashboards'], year: 2024, rating: 5 },
+    { id: 30, mainService: 'ai-automation', subService: 'crm', title: 'Supply Chain Automation', client: 'Logistics Company', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'End-to-end automation with real-time tracking', results: ['Cost -60%', 'Real-time visibility', '100+ integrations'], year: 2023, rating: 5 },
+    { id: 31, mainService: 'ai-automation', subService: 'chatbot', title: 'Customer Service Chatbot', client: 'E-Commerce Giant', image: 'https://images.unsplash.com/photo-1620712014215-7b16038111c0?w=500&h=400&fit=crop', description: 'NLP-powered handling 70% of inquiries', results: ['Tickets -70%', '24/7 availability', 'Satisfaction 95%'], year: 2024, rating: 5 },
+    { id: 32, mainService: 'ai-automation', subService: 'chatbot', title: 'Lead Qualification Chatbot', client: 'SaaS Company', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'AI chatbot with CRM integration', results: ['500+ leads/month', 'Conversion +35%', 'Response <1s'], year: 2024, rating: 5 },
+    { id: 33, mainService: 'ai-automation', subService: 'chatbot', title: 'Multi-Language Support Bot', client: 'Global Tech', image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&h=400&fit=crop', description: '15+ language support with sentiment analysis', results: ['15 languages', 'Accuracy 98%', '1M+ conversations'], year: 2023, rating: 5 },
+    { id: 34, mainService: 'ai-automation', subService: 'integration', title: 'Complex ERP Integration', client: 'Manufacturing', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'SAP integration with real-time inventory', results: ['Real-time sync', 'Accuracy 95%', 'Zero errors'], year: 2024, rating: 5 },
+    { id: 35, mainService: 'ai-automation', subService: 'integration', title: 'Banking Integration Platform', client: 'FinTech Company', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Secure bank API with PCI compliance', results: ['10+ banks', 'PCI-DSS', '$100M+ transactions'], year: 2024, rating: 5 },
+    { id: 36, mainService: 'ai-automation', subService: 'integration', title: 'Healthcare Data Exchange', client: 'Hospital Network', image: 'https://images.unsplash.com/photo-1576091160550-112173f31c77?w=500&h=400&fit=crop', description: 'HIPAA-compliant patient data exchange', results: ['HIPAA certified', '50K+ records', 'Real-time data'], year: 2023, rating: 5 },
+    { id: 37, mainService: 'marketing', subService: 'seo', title: 'E-Commerce SEO Optimization', client: 'Online Retail', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Full SEO transformation with content strategy', results: ['#1 for 50+ keywords', 'Traffic +400%', 'Revenue +$5M'], year: 2024, rating: 5 },
+    { id: 38, mainService: 'marketing', subService: 'seo', title: 'Local SEO for Service Business', client: 'Multi-Location', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: '50+ locations with GMB optimization', results: ['Top 3 ranking', 'Leads +200%', '1000+ reviews'], year: 2024, rating: 5 },
+    { id: 39, mainService: 'marketing', subService: 'seo', title: 'SaaS Website SEO', client: 'B2B SaaS', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Content pillars with technical optimization', results: ['#1 for 40+ keywords', 'Leads +250%', '10K+ MQL'], year: 2023, rating: 5 },
+    { id: 40, mainService: 'marketing', subService: 'ppc', title: 'Google Ads Campaign Management', client: 'Lead Generation Agency', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: '$500K+ monthly ad spend management', results: ['2.5x ROAS', '50K+ leads', 'AI optimization'], year: 2024, rating: 5 },
+    { id: 41, mainService: 'marketing', subService: 'ppc', title: 'B2B Lead Generation Ads', client: 'Enterprise Software', image: 'https://images.unsplash.com/photo-1620712014215-7b16038111c0?w=500&h=400&fit=crop', description: 'Strategic B2B campaigns for qualified leads', results: ['3.8x ROI', '500+ MQL', 'Conversion 20%'], year: 2024, rating: 5 },
+    { id: 42, mainService: 'marketing', subService: 'ppc', title: 'E-Commerce Shopping Campaigns', client: 'Fashion E-Commerce', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Google Shopping & Performance Max', results: ['Revenue $10M+', '4x ROAS', 'Dynamic remarketing'], year: 2024, rating: 5 },
+    { id: 43, mainService: 'marketing', subService: 'social-marketing', title: 'Influencer Marketing Campaign', client: 'Beauty & Wellness', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Multi-influencer Instagram & TikTok campaign', results: ['500M+ impressions', '50M+ engagements', '25% goal exceed'], year: 2024, rating: 5 },
+    { id: 44, mainService: 'marketing', subService: 'social-marketing', title: 'Viral Social Media Strategy', client: 'Consumer Tech', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Community-driven strategy with 2M+ followers', results: ['2M+ followers', '100M+ reach', '8% engagement'], year: 2024, rating: 5 },
+    { id: 45, mainService: 'marketing', subService: 'social-marketing', title: 'LinkedIn B2B Campaign', client: 'B2B SaaS', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Professional networking for partnerships', results: ['100K+ followers', 'Leads +50%', 'Engagement 5x'], year: 2023, rating: 5 },
+    { id: 46, mainService: 'ecommerce', subService: 'shopify', title: 'Shopify Store Setup & Optimization', client: 'Fashion Retail', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Custom Shopify store with advanced features', results: ['Revenue $2M+', 'Conversion +45%', 'Mobile optimized'], year: 2024, rating: 5 },
+    { id: 47, mainService: 'ecommerce', subService: 'shopify', title: 'WooCommerce Store Migration', client: 'Electronics Seller', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Migration with customizations', results: ['Zero data loss', 'Revenue +30%', '5000+ products'], year: 2024, rating: 5 },
+    { id: 48, mainService: 'ecommerce', subService: 'shopify', title: 'Wix Store Development', client: 'Boutique Shop', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Beautiful store with custom branding', results: ['Custom design', 'Easy management', 'Leads +60%'], year: 2024, rating: 5 },
+    { id: 49, mainService: 'ecommerce', subService: 'listings', title: 'Amazon Product Launch Strategy', client: 'Consumer Products', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Complete Amazon listing optimization', results: ['Best seller', 'Revenue $5M+', 'A9 optimization'], year: 2024, rating: 5 },
+    { id: 50, mainService: 'ecommerce', subService: 'listings', title: 'Multi-Channel Product Listings', client: 'Multi-Vendor', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Amazon, eBay, Etsy, Walmart optimization', results: ['Consistency', 'Visibility +200%', '10K+ products'], year: 2024, rating: 5 },
+    { id: 51, mainService: 'ecommerce', subService: 'listings', title: 'Inventory Management System', client: 'Retail Chain', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Real-time inventory across channels', results: ['Zero overselling', 'Real-time sync', '50K+ SKUs'], year: 2023, rating: 5 },
+    { id: 52, mainService: 'ecommerce', subService: 'marketplace', title: 'Amazon & eBay Store Setup', client: 'Wholesale Distributor', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Professional seller account setup', results: ['Professional store', 'Instant credibility', '$1M+ first year'], year: 2024, rating: 5 },
+    { id: 53, mainService: 'ecommerce', subService: 'marketplace', title: 'Etsy Shop Branding & Launch', client: 'Handmade Products', image: 'https://images.unsplash.com/photo-1620712014215-7b16038111c0?w=500&h=400&fit=crop', description: 'Branded Etsy shop with storytelling', results: ['Unique brand', 'Sales $500K+', 'Loyal customers'], year: 2024, rating: 5 },
+    { id: 54, mainService: 'ecommerce', subService: 'marketplace', title: 'Walmart Marketplace Integration', client: 'Third-Party Seller', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Walmart seller setup with fulfillment integration', results: ['Account approved', 'Sales +$2M', 'Fulfillment ready'], year: 2024, rating: 5 },
+  ], []);
 
   const services: Service[] = [
     {
@@ -222,62 +264,21 @@ const PortfolioShowcase: React.FC = () => {
     }
   ];
 
-  const allProjects: Project[] = [
-    { id: 1, mainService: 'graphic-design', subService: 'logo', title: 'Tech Startup Brand Identity', client: 'AI Solutions Inc.', image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=400&fit=crop', description: 'Complete brand identity with logo, guidelines and color palette', results: ['Award-winning design', 'Brand consistency', '95% satisfaction'], year: 2024, rating: 5 },
-    { id: 2, mainService: 'graphic-design', subService: 'logo', title: 'Luxury Retail Rebranding', client: 'Premium Fashion House', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Premium brand transformation for high-end retail', results: ['60% brand recognition', 'Premium positioning', 'Global rollout'], year: 2024, rating: 5 },
-    { id: 3, mainService: 'graphic-design', subService: 'logo', title: 'Non-Profit Organization Logo', client: 'Global Education NGO', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Meaningful visual identity for educational impact', results: ['50% donation increase', 'Community reach', '12 countries'], year: 2023, rating: 5 },
-    { id: 4, mainService: 'graphic-design', subService: 'ui-ux', title: 'Mobile Banking App UI/UX', client: 'FinTech Startup', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=400&fit=crop', description: 'Complete user interface design with interactive prototypes', results: ['130 design screens', '4.8★ rating', 'Accessible design'], year: 2024, rating: 5 },
-    { id: 5, mainService: 'graphic-design', subService: 'ui-ux', title: 'SaaS Dashboard Design System', client: 'Analytics Platform', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Enterprise design system with 200+ components', results: ['Design to dev', '40% faster builds', 'Component library'], year: 2024, rating: 5 },
-    { id: 6, mainService: 'graphic-design', subService: 'ui-ux', title: 'E-Learning Platform UX', client: 'Online Education Provider', image: 'https://images.unsplash.com/photo-1580828343555-20166e46e81c?w=500&h=400&fit=crop', description: 'UX overhaul with user research and testing', results: ['45% engagement ↑', '60% bounce ↓', 'WCAG compliant'], year: 2023, rating: 5 },
-    { id: 7, mainService: 'graphic-design', subService: 'social', title: 'Social Media Campaign Suite', client: 'Fashion E-Commerce', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: '500+ branded graphics for multi-platform campaign', results: ['2M+ impressions', '18% engagement', '500+ assets'], year: 2024, rating: 5 },
-    { id: 8, mainService: 'graphic-design', subService: 'social', title: 'Content Creator Branding', client: 'Lifestyle Influencer', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Complete visual identity package with templates', results: ['Brand aesthetics', '250+ templates', '500K followers'], year: 2024, rating: 5 },
-    { id: 9, mainService: 'graphic-design', subService: 'social', title: 'Environmental Awareness Campaign', client: 'Environmental NGO', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Viral social graphics for awareness campaign', results: ['3M+ reach', '250K shares', '40% goal exceed'], year: 2023, rating: 5 },
-    { id: 10, mainService: 'web-design', subService: 'custom-web', title: 'Enterprise SaaS Platform', client: 'B2B Software Company', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Full-stack MERN with real-time collaboration', results: ['10K+ users', 'Real-time sync', 'Enterprise scale'], year: 2024, rating: 5 },
-    { id: 11, mainService: 'web-design', subService: 'custom-web', title: 'Laravel E-Commerce Marketplace', client: 'Multi-Vendor Platform', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Multi-vendor marketplace with payment integration', results: ['500+ vendors', '1M+ transactions', '99.9% uptime'], year: 2024, rating: 5 },
-    { id: 12, mainService: 'web-design', subService: 'custom-web', title: 'Healthcare Management Portal', client: 'Multi-Specialty Hospital', image: 'https://images.unsplash.com/photo-1576091160550-112173f31c77?w=500&h=400&fit=crop', description: 'HIPAA-compliant patient management system', results: ['50K+ patients', 'HIPAA certified', 'Telemedicine'], year: 2023, rating: 5 },
-    { id: 13, mainService: 'web-design', subService: 'wordpress', title: 'Corporate Website with CMS', client: 'Fortune 500 Company', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Custom WordPress with multi-language support', results: ['Custom theme', 'Multi-language', '90+ speed'], year: 2024, rating: 5 },
-    { id: 14, mainService: 'web-design', subService: 'wordpress', title: 'Agency Portfolio Website', client: 'Creative Design Agency', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Beautiful portfolio with custom post types', results: ['Portfolio design', 'Inquiries +300%', 'Advanced filter'], year: 2023, rating: 5 },
-    { id: 15, mainService: 'web-design', subService: 'wordpress', title: 'Digital News Portal', client: 'Digital Media Company', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'High-traffic news portal with advanced search', results: ['5M+ visitors', 'Subscription system', 'Advanced search'], year: 2024, rating: 5 },
-    { id: 16, mainService: 'web-design', subService: 'saas', title: 'AI Tool SaaS Landing', client: 'AI Startup', image: 'https://images.unsplash.com/photo-1620712014215-7b16038111c0?w=500&h=400&fit=crop', description: 'High-converting landing with interactive demo', results: ['35% conversion', '15K sign-ups', 'International'], year: 2024, rating: 5 },
-    { id: 17, mainService: 'web-design', subService: 'saas', title: 'Project Management SaaS', client: 'Productivity Software', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Team collaboration platform with real-time updates', results: ['50K+ teams', 'Real-time collab', '99.99% uptime'], year: 2024, rating: 5 },
-    { id: 18, mainService: 'web-design', subService: 'saas', title: 'Marketing Automation Platform', client: 'B2B Marketing Tool', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Workflow builder with analytics dashboard', results: ['Enterprise clients', '100+ integrations', 'Automation'], year: 2023, rating: 5 },
-    { id: 19, mainService: 'app-dev', subService: 'native', title: 'Mobile Banking Application', client: 'FinTech Startup', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=400&fit=crop', description: 'Native iOS & Android with biometric security', results: ['100K+ downloads', 'PCI-DSS compliant', '4.8★ rating'], year: 2024, rating: 5 },
-    { id: 20, mainService: 'app-dev', subService: 'native', title: 'Fitness Tracking Application', client: 'Wellness Company', image: 'https://images.unsplash.com/photo-1580828343555-20166e46e81c?w=500&h=400&fit=crop', description: 'Health app with wearable integration', results: ['500K+ downloads', 'Apple Health', 'Wearables'], year: 2023, rating: 5 },
-    { id: 21, mainService: 'app-dev', subService: 'native', title: 'Real Estate Marketplace App', client: 'Property Management', image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&h=400&fit=crop', description: 'Property search with virtual tours', results: ['250K+ listings', 'Virtual tours', 'Video calls'], year: 2024, rating: 5 },
-    { id: 22, mainService: 'app-dev', subService: 'cross-platform', title: 'Ride-Sharing Application', client: 'Transportation Startup', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Cross-platform with GPS tracking', results: ['1M+ downloads', 'Real-time GPS', 'Payment integration'], year: 2024, rating: 5 },
-    { id: 23, mainService: 'app-dev', subService: 'cross-platform', title: 'E-Learning Mobile App', client: 'Online Education', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Flutter app with offline learning mode', results: ['2M+ students', 'Offline mode', '200+ courses'], year: 2023, rating: 5 },
-    { id: 24, mainService: 'app-dev', subService: 'cross-platform', title: 'Food Delivery App', client: 'Food Tech Company', image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&h=400&fit=crop', description: 'Multi-language food delivery platform', results: ['500K+ restaurants', 'Real-time tracking', 'Multi-language'], year: 2024, rating: 5 },
-    { id: 25, mainService: 'app-dev', subService: 'api', title: 'Multi-Payment Gateway', client: 'E-Commerce Platform', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Stripe, PayPal and local payment methods', results: ['50+ payments', '99.99% success', '$10M+ processed'], year: 2024, rating: 5 },
-    { id: 26, mainService: 'app-dev', subService: 'api', title: 'Third-Party API Ecosystem', client: 'SaaS Platform', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Salesforce, HubSpot, Shopify integration', results: ['100+ integrations', 'Real-time sync', 'Webhook management'], year: 2024, rating: 5 },
-    { id: 27, mainService: 'app-dev', subService: 'api', title: 'Microservices Architecture', client: 'Enterprise Tech', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Docker, Kubernetes scalable backend', results: ['12 microservices', 'Auto-scaling', 'API security'], year: 2023, rating: 5 },
-    { id: 28, mainService: 'ai-automation', subService: 'crm', title: 'Sales Pipeline Automation', client: 'B2B Software', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Salesforce CRM with custom workflows', results: ['70% faster sales', 'Conversions +40%', '50 workflows'], year: 2024, rating: 5 },
-    { id: 29, mainService: 'ai-automation', subService: 'crm', title: 'HubSpot CRM Implementation', client: 'Marketing Agency', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Marketing automation with lead nurturing', results: ['90% automation', 'Leads 3x', 'Custom dashboards'], year: 2024, rating: 5 },
-    { id: 30, mainService: 'ai-automation', subService: 'crm', title: 'Supply Chain Automation', client: 'Logistics Company', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'End-to-end automation with real-time tracking', results: ['Cost -60%', 'Real-time visibility', '100+ integrations'], year: 2023, rating: 5 },
-    { id: 31, mainService: 'ai-automation', subService: 'chatbot', title: 'Customer Service Chatbot', client: 'E-Commerce Giant', image: 'https://images.unsplash.com/photo-1620712014215-7b16038111c0?w=500&h=400&fit=crop', description: 'NLP-powered handling 70% of inquiries', results: ['Tickets -70%', '24/7 availability', 'Satisfaction 95%'], year: 2024, rating: 5 },
-    { id: 32, mainService: 'ai-automation', subService: 'chatbot', title: 'Lead Qualification Chatbot', client: 'SaaS Company', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'AI chatbot with CRM integration', results: ['500+ leads/month', 'Conversion +35%', 'Response <1s'], year: 2024, rating: 5 },
-    { id: 33, mainService: 'ai-automation', subService: 'chatbot', title: 'Multi-Language Support Bot', client: 'Global Tech', image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&h=400&fit=crop', description: '15+ language support with sentiment analysis', results: ['15 languages', 'Accuracy 98%', '1M+ conversations'], year: 2023, rating: 5 },
-    { id: 34, mainService: 'ai-automation', subService: 'integration', title: 'Complex ERP Integration', client: 'Manufacturing', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'SAP integration with real-time inventory', results: ['Real-time sync', 'Accuracy 95%', 'Zero errors'], year: 2024, rating: 5 },
-    { id: 35, mainService: 'ai-automation', subService: 'integration', title: 'Banking Integration Platform', client: 'FinTech Company', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Secure bank API with PCI compliance', results: ['10+ banks', 'PCI-DSS', '$100M+ transactions'], year: 2024, rating: 5 },
-    { id: 36, mainService: 'ai-automation', subService: 'integration', title: 'Healthcare Data Exchange', client: 'Hospital Network', image: 'https://images.unsplash.com/photo-1576091160550-112173f31c77?w=500&h=400&fit=crop', description: 'HIPAA-compliant patient data exchange', results: ['HIPAA certified', '50K+ records', 'Real-time data'], year: 2023, rating: 5 },
-    { id: 37, mainService: 'marketing', subService: 'seo', title: 'E-Commerce SEO Optimization', client: 'Online Retail', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Full SEO transformation with content strategy', results: ['#1 for 50+ keywords', 'Traffic +400%', 'Revenue +$5M'], year: 2024, rating: 5 },
-    { id: 38, mainService: 'marketing', subService: 'seo', title: 'Local SEO for Service Business', client: 'Multi-Location', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: '50+ locations with GMB optimization', results: ['Top 3 ranking', 'Leads +200%', '1000+ reviews'], year: 2024, rating: 5 },
-    { id: 39, mainService: 'marketing', subService: 'seo', title: 'SaaS Website SEO', client: 'B2B SaaS', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Content pillars with technical optimization', results: ['#1 for 40+ keywords', 'Leads +250%', '10K+ MQL'], year: 2023, rating: 5 },
-    { id: 40, mainService: 'marketing', subService: 'ppc', title: 'Google Ads Campaign Management', client: 'Lead Generation Agency', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: '$500K+ monthly ad spend management', results: ['2.5x ROAS', '50K+ leads', 'AI optimization'], year: 2024, rating: 5 },
-    { id: 41, mainService: 'marketing', subService: 'ppc', title: 'B2B Lead Generation Ads', client: 'Enterprise Software', image: 'https://images.unsplash.com/photo-1620712014215-7b16038111c0?w=500&h=400&fit=crop', description: 'Strategic B2B campaigns for qualified leads', results: ['3.8x ROI', '500+ MQL', 'Conversion 20%'], year: 2024, rating: 5 },
-    { id: 42, mainService: 'marketing', subService: 'ppc', title: 'E-Commerce Shopping Campaigns', client: 'Fashion E-Commerce', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Google Shopping & Performance Max', results: ['Revenue $10M+', '4x ROAS', 'Dynamic remarketing'], year: 2024, rating: 5 },
-    { id: 43, mainService: 'marketing', subService: 'social-marketing', title: 'Influencer Marketing Campaign', client: 'Beauty & Wellness', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Multi-influencer Instagram & TikTok campaign', results: ['500M+ impressions', '50M+ engagements', '25% goal exceed'], year: 2024, rating: 5 },
-    { id: 44, mainService: 'marketing', subService: 'social-marketing', title: 'Viral Social Media Strategy', client: 'Consumer Tech', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Community-driven strategy with 2M+ followers', results: ['2M+ followers', '100M+ reach', '8% engagement'], year: 2024, rating: 5 },
-    { id: 45, mainService: 'marketing', subService: 'social-marketing', title: 'LinkedIn B2B Campaign', client: 'B2B SaaS', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Professional networking for partnerships', results: ['100K+ followers', 'Leads +50%', 'Engagement 5x'], year: 2023, rating: 5 },
-    { id: 46, mainService: 'ecommerce', subService: 'shopify', title: 'Shopify Store Setup & Optimization', client: 'Fashion Retail', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Custom Shopify store with advanced features', results: ['Revenue $2M+', 'Conversion +45%', 'Mobile optimized'], year: 2024, rating: 5 },
-    { id: 47, mainService: 'ecommerce', subService: 'shopify', title: 'WooCommerce Store Migration', client: 'Electronics Seller', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Migration with customizations', results: ['Zero data loss', 'Revenue +30%', '5000+ products'], year: 2024, rating: 5 },
-    { id: 48, mainService: 'ecommerce', subService: 'shopify', title: 'Wix Store Development', client: 'Boutique Shop', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Beautiful store with custom branding', results: ['Custom design', 'Easy management', 'Leads +60%'], year: 2024, rating: 5 },
-    { id: 49, mainService: 'ecommerce', subService: 'listings', title: 'Amazon Product Launch Strategy', client: 'Consumer Products', image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=400&fit=crop', description: 'Complete Amazon listing optimization', results: ['Best seller', 'Revenue $5M+', 'A9 optimization'], year: 2024, rating: 5 },
-    { id: 50, mainService: 'ecommerce', subService: 'listings', title: 'Multi-Channel Product Listings', client: 'Multi-Vendor', image: 'https://images.unsplash.com/photo-1460925895917-aec73dc44925?w=500&h=400&fit=crop', description: 'Amazon, eBay, Etsy, Walmart optimization', results: ['Consistency', 'Visibility +200%', '10K+ products'], year: 2024, rating: 5 },
-    { id: 51, mainService: 'ecommerce', subService: 'listings', title: 'Inventory Management System', client: 'Retail Chain', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Real-time inventory across channels', results: ['Zero overselling', 'Real-time sync', '50K+ SKUs'], year: 2023, rating: 5 },
-    { id: 52, mainService: 'ecommerce', subService: 'marketplace', title: 'Amazon & eBay Store Setup', client: 'Wholesale Distributor', image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=500&h=400&fit=crop', description: 'Professional seller account setup', results: ['Professional store', 'Instant credibility', '$1M+ first year'], year: 2024, rating: 5 },
-    { id: 53, mainService: 'ecommerce', subService: 'marketplace', title: 'Etsy Shop Branding & Launch', client: 'Handmade Products', image: 'https://images.unsplash.com/photo-1620712014215-7b16038111c0?w=500&h=400&fit=crop', description: 'Branded Etsy shop with storytelling', results: ['Unique brand', 'Sales $500K+', 'Loyal customers'], year: 2024, rating: 5 },
-    { id: 54, mainService: 'ecommerce', subService: 'marketplace', title: 'Walmart Marketplace Integration', client: 'Third-Party Seller', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop', description: 'Walmart seller setup with fulfillment integration', results: ['Account approved', 'Sales +$2M', 'Fulfillment ready'], year: 2024, rating: 5 },
-  ];
+  // Auto-advance slider
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [heroSlides.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
 
   const toggleFilter = (serviceId: string, subServiceId: string): void => {
     setSelectedFilters((prev) => {
@@ -328,7 +329,7 @@ const PortfolioShowcase: React.FC = () => {
       );
     }
     return filtered;
-  }, [selectedFilters, searchQuery]);
+  }, [selectedFilters, searchQuery, allProjects]);
 
   const clearAllFilters = (): void => {
     setSelectedFilters({});
@@ -336,6 +337,10 @@ const PortfolioShowcase: React.FC = () => {
   };
 
   const activeFilterCount = Object.keys(selectedFilters).length;
+
+  const toggleMobileFilters = () => {
+    setMobileFilterOpen(prev => !prev);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -352,12 +357,14 @@ const PortfolioShowcase: React.FC = () => {
           >
             {/* Background Image */}
             <div className="absolute inset-0">
-              <img
+              <Image
                 src={heroSlides[currentSlide].image}
                 alt={heroSlides[currentSlide].title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                priority
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+              <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/40" />
             </div>
 
             {/* Content */}
@@ -412,7 +419,7 @@ const PortfolioShowcase: React.FC = () => {
                   exit="exit"
                   className="flex gap-4"
                 >
-                  <button className="px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-lg transition-all shadow-lg hover:shadow-xl hover:scale-105">
+                  <button className="px-8 py-4 bg-linear-to-r from-yellow-500 hover:from-yellow-600 to-yellow-600 hover:to-yellow-700 text-black font-bold rounded-lg transition-all shadow-lg hover:shadow-xl hover:scale-105">
                     Explore Projects
                   </button>
                   <button className="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold rounded-lg transition-all border border-white/30">
@@ -456,123 +463,6 @@ const PortfolioShowcase: React.FC = () => {
 
       <div className="relative max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-[330px_1fr] gap-8">
-          {/* Sidebar Filters */}
-          {/* <motion.aside
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
-            className={`${mobileFilterOpen ? 'block' : 'hidden'} md:block`}
-          >
-            <div className="bg-white border-2 border-gray-200 rounded-2xl p-8 sticky top-32 shadow-lg space-y-6 max-h-[calc(100vh-12rem)] overflow-hidden">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                  <Filter size={20} className="text-yellow-600" />
-                  Filter Services
-                </h3>
-                {activeFilterCount > 0 && (
-                  <span className="bg-yellow-500 text-black text-xs font-bold px-3 py-1 rounded-full">
-                    {activeFilterCount}
-                  </span>
-                )}
-              </div>
-              {activeFilterCount > 0 && (
-                <button
-                  onClick={clearAllFilters}
-                  className="w-full px-4 py-2 bg-red-50 hover:bg-red-100 border border-red-300 text-red-600 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
-                >
-                  <X size={16} />
-                  Clear All
-                </button>
-              )}
-              <div className="max-h-[calc(100vh-20rem)] overflow-y-auto space-y-3 pr-4">
-                {services.map((service) => {
-                  const isExpanded = expandedFilters[service.id];
-                  const allSelected = service.subServices.every(
-                    sub => selectedFilters[`${service.id}-${sub.id}`]
-                  );
-                  const someSelected = service.subServices.some(
-                    sub => selectedFilters[`${service.id}-${sub.id}`]
-                  );
-                  return (
-                    <div
-                      key={service.id}
-                      className="border-2 border-gray-200 rounded-xl overflow-hidden bg-gray-50 hover:bg-gray-100 transition-all"
-                    >
-                      <button
-                        onClick={() => setExpandedFilters(prev => ({
-                          ...prev,
-                          [service.id]: !prev[service.id]
-                        }))}
-                        className="w-full p-4 flex items-center justify-between"
-                      >
-                        <div className="flex items-center gap-3 flex-1">
-                          <input
-                            type="checkbox"
-                            checked={allSelected}
-                            onChange={() => toggleServiceFilter(service.id)}
-                            onClick={(e) => e.stopPropagation()}
-                            className="w-5 h-5 rounded accent-yellow-600 cursor-pointer"
-                          />
-                          <div className="flex items-center gap-2">
-                            {service.icon}
-                            <div className="text-left">
-                              <p className="text-sm font-semibold text-gray-900">{service.name}</p>
-                              <p className="text-xs text-gray-600">{service.subServices.length} services</p>
-                            </div>
-                          </div>
-                        </div>
-                        <motion.div
-                          animate={{ rotate: isExpanded ? 180 : 0 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <ChevronDown
-                            size={18}
-                            className={someSelected ? 'text-yellow-600' : 'text-gray-600'}
-                          />
-                        </motion.div>
-                      </button>
-                      <AnimatePresence>
-                        {isExpanded && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="border-t-2 border-gray-200 bg-white p-4 space-y-3"
-                          >
-                            {service.subServices.map((subService) => {
-                              const isChecked = selectedFilters[`${service.id}-${subService.id}`];
-                              const projectCount = allProjects.filter(
-                                p => p.mainService === service.id && p.subService === subService.id
-                              ).length;
-                              return (
-                                <label key={subService.id} className="flex items-center gap-3 cursor-pointer group">
-                                  <input
-                                    type="checkbox"
-                                    checked={isChecked}
-                                    onChange={() => toggleFilter(service.id, subService.id)}
-                                    className="w-4 h-4 rounded accent-yellow-600"
-                                  />
-                                  <span className={`text-sm flex-1 group-hover:text-yellow-600 transition-colors ${
-                                    isChecked ? 'text-yellow-600 font-semibold' : 'text-gray-700'
-                                  }`}>
-                                    {subService.name}
-                                  </span>
-                                  <span className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded font-semibold">
-                                    {projectCount}
-                                  </span>
-                                </label>
-                              );
-                            })}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </motion.aside> */}
           {/* Sidebar Filters */}
 <motion.aside
   initial={{ opacity: 0, x: -20 }}
@@ -743,7 +633,22 @@ const PortfolioShowcase: React.FC = () => {
 
           {/* Projects Section */}
           <div className="">
-            <div className="mb-8">
+            {/* FIX: Add mobile filter toggle button (visible only on mobile) */}
+            <div className="flex justify-between items-center mb-8 md:hidden">
+              <h2 className="text-4xl font-black text-gray-900 mb-2">
+               
+              </h2>
+              <button
+                onClick={toggleMobileFilters}
+                className="flex items-center gap-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-lg transition-all shadow-md"
+              >
+                <Filter size={20} />
+                {mobileFilterOpen ? 'Close' : 'Filters'}
+              </button>
+            </div>
+
+            {/* Desktop header (no button) */}
+            <div className="hidden md:flex md:justify-between md:items-center mb-8">
               <h2 className="text-4xl font-black text-gray-900 mb-2">
                
               </h2>
@@ -751,6 +656,14 @@ const PortfolioShowcase: React.FC = () => {
                 <p className="text-gray-600 text-sm">Filtering by {activeFilterCount} service{activeFilterCount !== 1 ? 's' : ''}</p>
               )}
             </div>
+
+            {/* Mobile filter count */}
+            {mobileFilterOpen && (
+              <p className="text-gray-600 text-sm mb-4 md:hidden">
+                Filtering by {activeFilterCount} service{activeFilterCount !== 1 ? 's' : ''}
+              </p>
+            )}
+
             <AnimatePresence mode="wait">
               {filteredProjects.length > 0 ? (
                 <motion.div
@@ -780,7 +693,7 @@ const PortfolioShowcase: React.FC = () => {
                             whileHover={{ scale: 1.1 }}
                             transition={{ duration: 0.4 }}
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                          
                           {/* Badge */}
                           <div className="absolute top-4 right-4 bg-yellow-500 text-black px-4 py-2 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
@@ -807,13 +720,13 @@ const PortfolioShowcase: React.FC = () => {
                                 key={idx}
                                 className="flex items-center gap-2"
                               >
-                                <Check size={16} className="text-green-600 flex-shrink-0" />
+                                <Check size={16} className="text-green-600 shrink-0" />
                                 <p className="text-xs text-gray-700 font-medium">{result}</p>
                               </div>
                             ))}
                           </div>
                           {/* CTA */}
-                          <button className="w-full py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg group-hover:scale-105">
+                          <button className="w-full py-3 bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg group-hover:scale-105">
                             View Project
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                           </button>
@@ -838,7 +751,7 @@ const PortfolioShowcase: React.FC = () => {
                   <p className="text-gray-600 mb-8 max-w-sm">Adjust your filters to discover more amazing work</p>
                   <button
                     onClick={clearAllFilters}
-                    className="px-8 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-bold rounded-xl transition-all shadow-lg"
+                    className="px-8 py-3 bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-bold rounded-xl transition-all shadow-lg"
                   >
                     Clear All Filters
                   </button>
@@ -855,7 +768,7 @@ const PortfolioShowcase: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg">
+                <div className="p-2 bg-linear-to-br from-yellow-400 to-yellow-600 rounded-lg">
                   <Sparkles className="text-white" size={24} />
                 </div>
                 <h3 className="text-xl font-bold">DiWebz Technology</h3>

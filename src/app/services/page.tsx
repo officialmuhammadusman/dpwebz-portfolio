@@ -3,9 +3,10 @@
 'use client';
 
 import { motion, AnimatePresence, Variants } from 'framer-motion';
+import Image from 'next/image';
 import {
   Palette, Globe, Smartphone, Lightbulb, TrendingUp, ShoppingCart,
-  ArrowRight, CheckCircle2, Award, ChevronLeft, ChevronRight
+  ArrowRight, CheckCircle2, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import ClientTestimonialsSection from '@/app/home/components/testimonials/ClientTestimonialsSection';
@@ -761,7 +762,20 @@ const serviceData = {
   }
 };
 
-function FullWidthHeroSlider({ service }: { service: any }) {
+interface ServiceData {
+  heroSlides: Array<{
+    image: string;
+    title: string[];
+    subtitle: string[];
+  }>;
+  stats: Array<{
+    number: string;
+    label: string;
+  }>;
+  color: string;
+}
+
+function FullWidthHeroSlider({ service }: { service: ServiceData }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -785,10 +799,12 @@ function FullWidthHeroSlider({ service }: { service: any }) {
           exit="exit"
           className="absolute inset-0"
         >
-          <img
+          <Image
             src={service.heroSlides[currentSlide].image}
             alt="Hero"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         </motion.div>
@@ -846,7 +862,7 @@ function FullWidthHeroSlider({ service }: { service: any }) {
 
         {/* Stats */}
         <motion.div variants={subtitleVariants} className="flex gap-8 pt-6">
-          {service.stats.map((stat: any, i: number) => (
+          {service.stats.map((stat, i: number) => (
             <div key={i}>
               <div className="text-3xl md:text-4xl font-black text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] mb-1">
                 {stat.number}
@@ -899,7 +915,7 @@ function FullWidthHeroSlider({ service }: { service: any }) {
 
       {/* Slide Indicators */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
-        {service.heroSlides.map((_: any, i: number) => (
+        {service.heroSlides.map((_, i: number) => (
           <button
             key={i}
             onClick={() => setCurrentSlide(i)}
@@ -1027,9 +1043,11 @@ function ServicePage({ serviceKey, onTabChange }: { serviceKey: string, onTabCha
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
                 >
-                  <img
+                  <Image
                     src={service.featuredCaseStudy.image}
                     alt={service.featuredCaseStudy.title}
+                    width={1200}
+                    height={768}
                     className="w-full h-96 object-cover rounded-xl shadow-lg"
                   />
                 </motion.div>
@@ -1050,7 +1068,7 @@ function ServicePage({ serviceKey, onTabChange }: { serviceKey: string, onTabCha
                   <div className="mb-6">
                     <h3 className="text-sm font-bold text-gray-500 uppercase mb-2">Results</h3>
                     <div className="grid grid-cols-2 gap-3">
-                      {service.featuredCaseStudy.results.map((result: string, i: number) => (
+                      {service.featuredCaseStudy.results.map((result, i: number) => (
                         <motion.div
                           key={i}
                           initial={{ opacity: 0, y: 10 }}
@@ -1072,7 +1090,7 @@ function ServicePage({ serviceKey, onTabChange }: { serviceKey: string, onTabCha
                     transition={{ delay: 0.6 }}
                     className="bg-white p-6 rounded-xl border-l-4 border-[#fec107]"
                   >
-                    <p className="text-gray-700 italic mb-3">"{service.featuredCaseStudy.testimonial}"</p>
+                    <p className="text-gray-700 italic mb-3">&ldquo;{service.featuredCaseStudy.testimonial}&rdquo;</p>
                     <p className="text-sm font-bold text-gray-900">— {service.featuredCaseStudy.author}</p>
                   </motion.div>
                 </motion.div>
@@ -1098,7 +1116,7 @@ function ServicePage({ serviceKey, onTabChange }: { serviceKey: string, onTabCha
             </motion.div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {service.subServices.map((subService: any, i: number) => (
+              {service.subServices.map((subService, i: number) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 30 }}
@@ -1109,13 +1127,18 @@ function ServicePage({ serviceKey, onTabChange }: { serviceKey: string, onTabCha
                   className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-[#fec107] hover:shadow-xl transition-all"
                 >
                   <div className="relative h-48 overflow-hidden">
-                    <motion.img
-                      src={subService.image}
-                      alt={subService.name}
-                      className="w-full h-full object-cover"
+                    <motion.div
+                      className="absolute inset-0"
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.6 }}
-                    />
+                    >
+                      <Image
+                        src={subService.image}
+                        alt={subService.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </motion.div>
                     <div className={`absolute inset-0 bg-gradient-to-t from-black/60 to-transparent`} />
                   </div>
                   <div className="p-6">
@@ -1124,7 +1147,7 @@ function ServicePage({ serviceKey, onTabChange }: { serviceKey: string, onTabCha
                     <div className="mb-4">
                       <p className="text-sm font-bold text-gray-500 uppercase mb-2">Deliverables</p>
                       <div className="flex flex-wrap gap-2">
-                        {subService.deliverables.map((item: string, j: number) => (
+                        {subService.deliverables.map((item, j: number) => (
                           <span key={j} className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
                             {item}
                           </span>
@@ -1156,7 +1179,7 @@ function ServicePage({ serviceKey, onTabChange }: { serviceKey: string, onTabCha
             </motion.div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {service.projects.map((project: any, i: number) => (
+              {service.projects.map((project, i: number) => (
                 <motion.div
                   key={project.id}
                   initial={{ opacity: 0, y: 30 }}
@@ -1167,13 +1190,18 @@ function ServicePage({ serviceKey, onTabChange }: { serviceKey: string, onTabCha
                   className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-[#fec107] hover:shadow-xl transition-all"
                 >
                   <div className="relative h-56 overflow-hidden">
-                    <motion.img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover"
+                    <motion.div
+                      className="absolute inset-0"
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.6 }}
-                    />
+                    >
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </motion.div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 bg-white/90 text-gray-900 text-xs font-bold rounded-full">
@@ -1184,7 +1212,7 @@ function ServicePage({ serviceKey, onTabChange }: { serviceKey: string, onTabCha
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-4">{project.title}</h3>
                     <div className="space-y-2">
-                      {project.results.map((result: string, j: number) => (
+                      {project.results.map((result, j: number) => (
                         <div key={j} className="flex items-center gap-2">
                           <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.color}`} />
                           <span className="text-gray-700 font-medium text-sm">{result}</span>
@@ -1213,7 +1241,7 @@ function ServicePage({ serviceKey, onTabChange }: { serviceKey: string, onTabCha
             </motion.div>
 
             <div className="max-w-3xl mx-auto space-y-4">
-              {service.faqs.map((faq: any, i: number) => (
+              {service.faqs.map((faq, i: number) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
@@ -1238,7 +1266,7 @@ function ServicePage({ serviceKey, onTabChange }: { serviceKey: string, onTabCha
           >
             <h2 className="text-3xl md:text-4xl font-black mb-4">Ready to Get Started?</h2>
             <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-              Let's discuss your project and create something amazing together.
+              Let&apos;s discuss your project and create something amazing together.
             </p>
             <motion.a
               href="#contact"
@@ -1258,15 +1286,6 @@ function ServicePage({ serviceKey, onTabChange }: { serviceKey: string, onTabCha
 
 export default function ServicesPage() {
   const [activeTab, setActiveTab] = useState('graphic-design');
-
-  const tabs = [
-    { key: 'graphic-design', label: 'Design', icon: Palette },
-    { key: 'web-development', label: 'Web', icon: Globe },
-    { key: 'app-development', label: 'Apps', icon: Smartphone },
-    { key: 'automation-ai', label: 'AI', icon: Lightbulb },
-    { key: 'digital-marketing', label: 'Marketing', icon: TrendingUp },
-    { key: 'ecommerce', label: 'eCommerce', icon: ShoppingCart },
-  ];
 
   useEffect(() => {
     const syncTabWithHash = () => {

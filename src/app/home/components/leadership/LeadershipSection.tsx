@@ -404,18 +404,17 @@
 
 
 
-
-'use client'
-import { motion, AnimatePresence } from 'framer-motion';
+"use client";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Linkedin, Twitter, Mail } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import React from 'react';
 
 const leadership = [
   {
     id: 1,
     name: 'Bilal Nawaz',
-    title: 'Chief Executive Officer',
+    title: 'Founder & CEO',
     bio: 'Visionary leader with 4+ years driving digital transformation across Fortune 10 companies',
     image: '/ceo.jpg',
     socials: [
@@ -426,8 +425,8 @@ const leadership = [
   },
   {
     id: 2,
-    name: 'Michael Chen',
-    title: 'Chief Technology Officer',
+    name: 'Shoaib Qureshi',
+    title: 'COfounder & brand Manager',
     bio: 'Tech visionary specializing in scalable architecture and AI integration',
     image: '/cto.jpg',
     socials: [
@@ -438,7 +437,7 @@ const leadership = [
   },
   {
     id: 3,
-    name: 'Emma Williams',
+    name: 'Ammar Rana ',
     title: 'Chief Design Officer',
     bio: 'Award-winning designer passionate about creating intuitive user experiences',
     image: 'member.jpg',
@@ -487,7 +486,19 @@ bio: 'Team lead developer driving scalable solutions and mentoring high-performi
   },
 ];
 
-function LeaderCard({ leader, isVisible }) {
+interface Leader {
+  id: number;
+  name: string;
+  title: string;
+  bio: string;
+  image: string;
+  socials: Array<{
+    icon: React.ComponentType<{ size?: number; className?: string }>;
+    url: string;
+  }>;
+}
+
+function LeaderCard({ leader, isVisible }: { leader: Leader; isVisible: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -530,7 +541,7 @@ function LeaderCard({ leader, isVisible }) {
 
           {/* Social Links */}
           <div className="flex gap-3 pt-6 border-t border-gray-100">
-            {leader.socials.map((social, idx) => {
+            {leader.socials.map((social, idx: number) => {
               const Icon = social.icon;
               return (
                 <motion.a
@@ -554,17 +565,16 @@ function LeaderCard({ leader, isVisible }) {
 export default function LeadershipSection() {
   const itemsPerView = { mobile: 1, tablet: 2, desktop: 3 };
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [windowSize, setWindowSize] = useState('desktop');
 
-  // Determine items per slide based on screen size
-  const getItemsPerSlide = () => {
+  // Memoize getItemsPerSlide to avoid recreating the function
+  const getItemsPerSlide = useCallback(() => {
     if (typeof window !== 'undefined') {
       if (window.innerWidth < 768) return itemsPerView.mobile;
       if (window.innerWidth < 1024) return itemsPerView.tablet;
       return itemsPerView.desktop;
     }
     return itemsPerView.desktop;
-  };
+  }, [itemsPerView.mobile, itemsPerView.tablet, itemsPerView.desktop]);
 
   const [itemsPerSlide, setItemsPerSlide] = useState(itemsPerView.desktop);
 
@@ -572,15 +582,12 @@ export default function LeadershipSection() {
     const updateSize = () => {
       const items = getItemsPerSlide();
       setItemsPerSlide(items);
-      if (window.innerWidth < 768) setWindowSize('mobile');
-      else if (window.innerWidth < 1024) setWindowSize('tablet');
-      else setWindowSize('desktop');
     };
 
     updateSize();
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
-  }, []);
+  }, [getItemsPerSlide]);
 
   const totalSlides = Math.ceil(leadership.length / itemsPerSlide);
   const startIdx = currentSlide * itemsPerSlide;
@@ -594,7 +601,7 @@ export default function LeadershipSection() {
     setCurrentSlide((prev) => Math.min(totalSlides - 1, prev + 1));
   };
 
-  const handleDotClick = (index) => {
+  const handleDotClick = (index: number) => {
     setCurrentSlide(index);
   };
 
@@ -673,7 +680,7 @@ export default function LeadershipSection() {
               transition={{ duration: 0.3 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {visibleLeaders.map((leader, idx) => (
+              {visibleLeaders.map((leader) => (
                 <LeaderCard
                   key={leader.id}
                   leader={leader}
@@ -775,7 +782,7 @@ export default function LeadershipSection() {
       transition={{ delay: 0.2, duration: 0.6 }}
       className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto"
     >
-      We're always looking for talented individuals to join our mission.
+      We&apos;re always looking for talented individuals to join our mission.
     </motion.p>
 
     <motion.div
