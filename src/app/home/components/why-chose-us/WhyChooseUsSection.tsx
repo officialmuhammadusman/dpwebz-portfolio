@@ -1,7 +1,7 @@
 // 
 'use client';
 import { motion, useInView } from 'framer-motion';
-import { Award, Clock, Users, Globe2, Target, Shield, Zap, TrendingUp } from 'lucide-react';
+import { Award, Clock, Users, Globe2, Target, Shield, Zap, TrendingUp, ArrowRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import type { JSX } from 'react';
 
@@ -183,7 +183,7 @@ export default function WhyChooseUsSection(): JSX.Element {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-      <motion.div
+      {/* <motion.div
   className="text-center mb-20"
   initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }}
@@ -222,6 +222,44 @@ export default function WhyChooseUsSection(): JSX.Element {
   >
     We combine experience, expertise, and innovation to deliver results that exceed expectations
   </motion.p>
+</motion.div> */}
+<motion.div 
+  className="text-center mb-20" 
+  initial={{ opacity: 0 }} 
+  whileInView={{ opacity: 1 }} 
+  viewport={{ once: true }} 
+> 
+  <motion.span 
+    initial={{ opacity: 0, y: 30 }} 
+    whileInView={{ opacity: 1, y: 0 }} 
+    transition={{ duration: 0.6 }} 
+    className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block"
+    style={{ color: '#fec107' }}
+  > 
+    Why Choose DPWebz 
+  </motion.span> 
+ 
+  <motion.h2 
+    initial={{ opacity: 0, y: 30 }} 
+    whileInView={{ opacity: 1, y: 0 }} 
+    transition={{ duration: 0.7, delay: 0.1 }} 
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight" 
+    style={{ color: '#000000' }}
+  > 
+    Trusted by{" "} 
+    <span style={{ color: '#fec107' }}> 
+      Businesses Worldwide 
+    </span> 
+  </motion.h2> 
+ 
+  <motion.p 
+    initial={{ opacity: 0, y: 30 }} 
+    whileInView={{ opacity: 1, y: 0 }} 
+    transition={{ duration: 0.7, delay: 0.2 }} 
+    className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed" 
+  > 
+    We combine experience, expertise, and innovation to deliver results that exceed expectations 
+  </motion.p> 
 </motion.div>
 
         {/* Stats Grid */}
@@ -329,24 +367,37 @@ export default function WhyChooseUsSection(): JSX.Element {
         </motion.div>
 
         {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-16"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-[#fec107] text-black px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:bg-[#eab308] transition-all duration-300"
-          >
-            Start Your Project Today
-          </motion.button>
-          <p className="text-gray-500 text-sm mt-4">
-            Join 350+ satisfied clients worldwide
-          </p>
-        </motion.div>
+      <motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8, delay: 0.2 }}
+  className="bg-gradient-to-r from-[#fec107] via-[#FFD54F] to-[#FFD700] rounded-3xl p-12 md:p-16 relative overflow-hidden text-center mt-16"
+>
+  <motion.button
+    whileHover={{ scale: 1.05, y: -4 }}
+    whileTap={{ scale: 0.95 }}
+    className="inline-flex items-center justify-center gap-3 bg-black text-yellow-500 px-10 py-4 rounded-xl font-bold text-lg shadow-xl hover:text-white transition-colors duration-300"
+  >
+    Start Your Project Today
+    <motion.div
+      animate={{ x: [0, 4, 0] }}
+      transition={{ duration: 1.5, repeat: Infinity }}
+    >
+      <ArrowRight size={20} />
+    </motion.div>
+  </motion.button>
+
+  <motion.p
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    transition={{ delay: 0.4, duration: 0.6 }}
+    className="text-black text-md mt-4  "
+  >
+    Join 350+ satisfied clients worldwide
+  </motion.p>
+</motion.div>
+
       </div>
     </section>
   );

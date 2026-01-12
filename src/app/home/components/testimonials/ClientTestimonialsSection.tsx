@@ -98,7 +98,7 @@ export default function ClientTestimonialsSection() {
     <section className="py-24 lg:py-32 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
-       <motion.div
+       {/* <motion.div
   className="text-center mb-20"
   initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }}
@@ -137,7 +137,46 @@ export default function ClientTestimonialsSection() {
   >
     Real results from real clients who transformed their businesses with our solutions.
   </motion.p>
+</motion.div> */}
+<motion.div
+  className="text-center mb-20"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+>
+  <motion.span
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block"
+    style={{ color: "#fec107" }}
+  >
+    Client Success Stories
+  </motion.span>
+
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    Trusted by{" "}
+    <span style={{ color: "#fec107" }}>
+      Industry Leaders
+    </span>
+  </motion.h2>
+
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.2 }}
+    className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+  >
+    Real results from real clients who transformed their businesses with our solutions.
+  </motion.p>
 </motion.div>
+
 
         {/* Carousel Container */}
         <div className="relative">

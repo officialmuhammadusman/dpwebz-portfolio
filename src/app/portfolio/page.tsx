@@ -343,463 +343,459 @@ const PortfolioShowcase: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Slider */}
-      <div className="relative h-[600px] md:h-[700px] overflow-hidden bg-black">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.7 }}
-            className="absolute inset-0"
-          >
-            {/* Background Image */}
-            <div className="absolute inset-0">
-              <Image
-                src={heroSlides[currentSlide].image}
-                alt={heroSlides[currentSlide].title}
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/40" />
-            </div>
-
-            {/* Content */}
-            <div className="relative h-full max-w-7xl mx-auto px-6 flex items-center">
-              <div className="max-w-3xl">
-                <motion.div
-                  variants={subtitleVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className="inline-block mb-4"
-                >
-                  <span className="px-4 py-2 bg-yellow-500 text-black text-sm font-bold rounded-full uppercase tracking-wider">
-                    DiWebz Technology
-                  </span>
-                </motion.div>
-                
-                <motion.h1
-                  variants={titleVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className="text-5xl md:text-7xl font-black text-white mb-4 leading-tight"
-                >
-                  {heroSlides[currentSlide].title}
-                </motion.h1>
-                
-                <motion.p
-                  variants={subtitleVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className="text-2xl md:text-3xl font-bold text-yellow-400 mb-6"
-                >
-                  {heroSlides[currentSlide].subtitle}
-                </motion.p>
-                
-                <motion.p
-                  variants={subtitleVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className="text-lg text-gray-300 mb-8 max-w-2xl"
-                >
-                  {heroSlides[currentSlide].description}
-                </motion.p>
-                
-                <motion.div
-                  variants={subtitleVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className="flex gap-4"
-                >
-                  <button className="px-8 py-4 bg-linear-to-r from-yellow-500 hover:from-yellow-600 to-yellow-600 hover:to-yellow-700 text-black font-bold rounded-lg transition-all shadow-lg hover:shadow-xl hover:scale-105">
-                    Explore Projects
-                  </button>
-                  <button className="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold rounded-lg transition-all border border-white/30">
-                    Get In Touch
-                  </button>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Navigation Arrows */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-full transition-all border border-white/30 hover:scale-110"
-        >
-          <ChevronLeft size={24} />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute right-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-full transition-all border border-white/30 hover:scale-110"
-        >
-          <ChevronRight size={24} />
-        </button>
-
-        {/* Slide Indicators */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-          {heroSlides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`h-2 rounded-full transition-all ${
-                index === currentSlide ? 'w-12 bg-yellow-500' : 'w-2 bg-white/40'
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-
-     
-
-      <div className="relative max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[330px_1fr] gap-8">
-          {/* Sidebar Filters */}
-<motion.aside
-  initial={{ opacity: 0, x: -20 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ delay: 0.1 }}
-  className={`${mobileFilterOpen ? 'block' : 'hidden'} md:block`}
->
-  <div className="bg-white border-2 border-gray-200 rounded-2xl p-8 sticky top-32 shadow-lg space-y-6 max-h-[calc(100vh-12rem)] overflow-hidden">
-    
-    {/* Inline scrollbar styles */}
-    <style jsx>{`
-      .sidebar-scroll::-webkit-scrollbar {
-        width: 6px;
-      }
-      .sidebar-scroll::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      .sidebar-scroll::-webkit-scrollbar-thumb {
-        background-color: #9ca3af;
-        border-radius: 9999px;
-      }
-      .sidebar-scroll::-webkit-scrollbar-thumb:hover {
-        background-color: #6b7280;
-      }
-    `}</style>
-
-    <div className="flex items-center justify-between">
-      <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-        <Filter size={20} className="text-yellow-600" />
-        Filter Services
-      </h3>
-      {activeFilterCount > 0 && (
-        <span className="bg-yellow-500 text-black text-xs font-bold px-3 py-1 rounded-full">
-          {activeFilterCount}
-        </span>
-      )}
-    </div>
-
-    {activeFilterCount > 0 && (
-      <button
-        onClick={clearAllFilters}
-        className="w-full px-4 py-2 bg-red-50 hover:bg-red-100 border border-red-300 text-red-600 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+   <div className="min-h-screen bg-white">
+  {/* Hero Slider */}
+  <div className="relative h-[600px] md:h-[700px] overflow-hidden bg-black">
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={currentSlide}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.7 }}
+        className="absolute inset-0"
       >
-        <X size={16} />
-        Clear All
-      </button>
-    )}
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src={heroSlides[currentSlide].image}
+            alt={heroSlides[currentSlide].title}
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+        </div>
 
-    {/* Scrollable area */}
-    <div
-      className="max-h-[calc(100vh-20rem)] overflow-y-auto space-y-3 pr-4 sidebar-scroll"
-      style={{
-        scrollbarWidth: 'thin',                 // Firefox
-        scrollbarColor: '#9ca3af transparent'   // Firefox
-      }}
-    >
-      {services.map((service) => {
-        const isExpanded = expandedFilters[service.id];
-        const allSelected = service.subServices.every(
-          sub => selectedFilters[`${service.id}-${sub.id}`]
-        );
-        const someSelected = service.subServices.some(
-          sub => selectedFilters[`${service.id}-${sub.id}`]
-        );
-
-        return (
-          <div
-            key={service.id}
-            className="border-2 border-gray-200 rounded-xl overflow-hidden bg-gray-50 hover:bg-gray-100 transition-all"
-          >
-            <button
-              onClick={() =>
-                setExpandedFilters(prev => ({
-                  ...prev,
-                  [service.id]: !prev[service.id],
-                }))
-              }
-              className="w-full p-4 flex items-center justify-between"
+        {/* Content */}
+        <div className="relative h-full max-w-7xl mx-auto px-6 flex items-center">
+          <div className="max-w-3xl">
+            <motion.div
+              variants={subtitleVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="inline-block mb-4"
             >
-              <div className="flex items-center gap-3 flex-1">
-                <input
-                  type="checkbox"
-                  checked={allSelected}
-                  onChange={() => toggleServiceFilter(service.id)}
-                  onClick={(e) => e.stopPropagation()}
-                  className="w-5 h-5 rounded accent-yellow-600 cursor-pointer"
-                />
-                <div className="flex items-center gap-2">
-                  {service.icon}
-                  <div className="text-left">
-                    <p className="text-sm font-semibold text-gray-900">
-                      {service.name}
-                    </p>
-                    <p className="text-xs text-gray-600">
-                      {service.subServices.length} services
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <motion.div
-                animate={{ rotate: isExpanded ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <ChevronDown
-                  size={18}
-                  className={someSelected ? 'text-yellow-600' : 'text-gray-600'}
-                />
-              </motion.div>
-            </button>
-
-            <AnimatePresence>
-              {isExpanded && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="border-t-2 border-gray-200 bg-white p-4 space-y-3"
-                >
-                  {service.subServices.map((subService) => {
-                    const isChecked =
-                      selectedFilters[`${service.id}-${subService.id}`];
-                    const projectCount = allProjects.filter(
-                      p =>
-                        p.mainService === service.id &&
-                        p.subService === subService.id
-                    ).length;
-
-                    return (
-                      <label
-                        key={subService.id}
-                        className="flex items-center gap-3 cursor-pointer group"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={isChecked}
-                          onChange={() =>
-                            toggleFilter(service.id, subService.id)
-                          }
-                          className="w-4 h-4 rounded accent-yellow-600"
-                        />
-                        <span
-                          className={`text-sm flex-1 group-hover:text-yellow-600 transition-colors ${
-                            isChecked
-                              ? 'text-yellow-600 font-semibold'
-                              : 'text-gray-700'
-                          }`}
-                        >
-                          {subService.name}
-                        </span>
-                        <span className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded font-semibold">
-                          {projectCount}
-                        </span>
-                      </label>
-                    );
-                  })}
-                </motion.div>
-              )}
-            </AnimatePresence>
+            
+            </motion.div>
+            
+            <motion.h1
+              variants={titleVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="text-5xl md:text-7xl font-black text-white mb-4 leading-tight"
+            >
+              {heroSlides[currentSlide].title}
+            </motion.h1>
+            
+            <motion.p
+              variants={subtitleVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="text-2xl md:text-3xl font-bold text-[#fec107] mb-6"
+            >
+              {heroSlides[currentSlide].subtitle}
+            </motion.p>
+            
+            <motion.p
+              variants={subtitleVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="text-lg text-gray-300 mb-8 max-w-2xl"
+            >
+              {heroSlides[currentSlide].description}
+            </motion.p>
+            
+            <motion.div
+              variants={subtitleVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="flex gap-4"
+            >
+              <button className="px-8 py-4 bg-[#fec107] hover:bg-[#e0b200] text-black font-bold rounded-lg transition-all shadow-lg hover:shadow-xl hover:scale-105">
+                Explore Projects
+              </button>
+              <button className="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold rounded-lg transition-all border border-white/30">
+                Get In Touch
+              </button>
+            </motion.div>
           </div>
-        );
-      })}
+        </div>
+      </motion.div>
+    </AnimatePresence>
+
+    {/* Navigation Arrows */}
+    <button
+      onClick={prevSlide}
+      className="absolute left-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-full transition-all border border-white/30 hover:scale-110"
+    >
+      <ChevronLeft size={24} />
+    </button>
+    <button
+      onClick={nextSlide}
+      className="absolute right-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-full transition-all border border-white/30 hover:scale-110"
+    >
+      <ChevronRight size={24} />
+    </button>
+
+    {/* Slide Indicators */}
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+      {heroSlides.map((_, index) => (
+        <button
+          key={index}
+          onClick={() => setCurrentSlide(index)}
+          className={`h-2 rounded-full transition-all ${
+            index === currentSlide ? 'w-12 bg-[#fec107]' : 'w-2 bg-white/40'
+          }`}
+        />
+      ))}
     </div>
   </div>
-</motion.aside>
 
+  <div className="relative max-w-7xl mx-auto px-6 py-12">
+    <div className="grid grid-cols-1 lg:grid-cols-[330px_1fr] gap-8">
+      {/* Sidebar Filters */}
+      <motion.aside
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.1 }}
+        className={`${mobileFilterOpen ? 'block' : 'hidden'} md:block`}
+      >
+        <div className="bg-white border-2 border-gray-200 rounded-2xl p-8 sticky top-32 shadow-lg space-y-6 max-h-[calc(100vh-12rem)] overflow-hidden">
+          
+          {/* Inline scrollbar styles */}
+          <style jsx>{`
+            .sidebar-scroll::-webkit-scrollbar {
+              width: 6px;
+            }
+            .sidebar-scroll::-webkit-scrollbar-track {
+              background: transparent;
+            }
+            .sidebar-scroll::-webkit-scrollbar-thumb {
+              background-color: #9ca3af;
+              border-radius: 9999px;
+            }
+            .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+              background-color: #6b7280;
+            }
+          `}</style>
 
-          {/* Projects Section */}
-          <div className="">
-            {/* FIX: Add mobile filter toggle button (visible only on mobile) */}
-            <div className="flex justify-between items-center mb-8 md:hidden">
-              <h2 className="text-4xl font-black text-gray-900 mb-2">
-               
-              </h2>
-              <button
-                onClick={toggleMobileFilters}
-                className="flex items-center gap-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-lg transition-all shadow-md"
-              >
-                <Filter size={20} />
-                {mobileFilterOpen ? 'Close' : 'Filters'}
-              </button>
-            </div>
-
-            {/* Desktop header (no button) */}
-            <div className="hidden md:flex md:justify-between md:items-center mb-8">
-              <h2 className="text-4xl font-black text-gray-900 mb-2">
-               
-              </h2>
-              {activeFilterCount > 0 && (
-                <p className="text-gray-600 text-sm">Filtering by {activeFilterCount} service{activeFilterCount !== 1 ? 's' : ''}</p>
-              )}
-            </div>
-
-            {/* Mobile filter count */}
-            {mobileFilterOpen && (
-              <p className="text-gray-600 text-sm mb-4 md:hidden">
-                Filtering by {activeFilterCount} service{activeFilterCount !== 1 ? 's' : ''}
-              </p>
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+              <Filter size={20} className="text-[#fec107]" />
+              Filter Services
+            </h3>
+            {activeFilterCount > 0 && (
+              <span className="bg-[#fec107] text-black text-xs font-bold px-3 py-1 rounded-full">
+                {activeFilterCount}
+              </span>
             )}
+          </div>
 
-            <AnimatePresence mode="wait">
-              {filteredProjects.length > 0 ? (
-                <motion.div
-                  key="projects-list"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8"
+          {activeFilterCount > 0 && (
+            <button
+              onClick={clearAllFilters}
+              className="w-full px-4 py-2 bg-red-50 hover:bg-red-100 border border-red-300 text-red-600 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+            >
+              <X size={16} />
+              Clear All
+            </button>
+          )}
+
+          {/* Scrollable area */}
+          <div
+            className="max-h-[calc(100vh-20rem)] overflow-y-auto space-y-3 pr-4 sidebar-scroll"
+            style={{
+              scrollbarWidth: 'thin',
+              scrollbarColor: '#9ca3af transparent'
+            }}
+          >
+            {services.map((service) => {
+              const isExpanded = expandedFilters[service.id];
+              const allSelected = service.subServices.every(
+                sub => selectedFilters[`${service.id}-${sub.id}`]
+              );
+              const someSelected = service.subServices.some(
+                sub => selectedFilters[`${service.id}-${sub.id}`]
+              );
+
+              return (
+                <div
+                  key={service.id}
+                  className="border-2 border-gray-200 rounded-xl overflow-hidden bg-gray-50 hover:bg-gray-100 transition-all"
                 >
-                  {filteredProjects.map((project, index) => (
-                    <motion.div
-                      key={project.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                      whileHover={{ y: -8 }}
-                      className="group cursor-pointer h-full"
-                    >
-                      <div className="relative bg-white rounded-2xl overflow-hidden border-2 border-gray-200 hover:border-yellow-500 transition-all duration-300 h-full flex flex-col shadow-lg hover:shadow-2xl">
-                        {/* Image */}
-                        <div className="relative h-56 overflow-hidden bg-gray-100">
-                          <motion.img
-                            src={project.image}
-                            alt={project.title}
-                            className="w-full h-full object-cover"
-                            whileHover={{ scale: 1.1 }}
-                            transition={{ duration: 0.4 }}
-                          />
-                          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                         
-                          {/* Badge */}
-                          <div className="absolute top-4 right-4 bg-yellow-500 text-black px-4 py-2 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
-                            <Award size={14} />
-                            {project.year}
-                          </div>
-                        </div>
-                        {/* Content */}
-                        <div className="p-6 flex-1 flex flex-col bg-white">
-                          <p className="text-xs font-bold text-yellow-600 uppercase tracking-widest mb-3">
-                            {project.client}
+                  <button
+                    onClick={() =>
+                      setExpandedFilters(prev => ({
+                        ...prev,
+                        [service.id]: !prev[service.id],
+                      }))
+                    }
+                    className="w-full p-4 flex items-center justify-between"
+                  >
+                    <div className="flex items-center gap-3 flex-1">
+                      <input
+                        type="checkbox"
+                        checked={allSelected}
+                        onChange={() => toggleServiceFilter(service.id)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-5 h-5 rounded accent-[#fec107] cursor-pointer"
+                      />
+                      <div className="flex items-center gap-2">
+                        {service.icon}
+                        <div className="text-left">
+                          <p className="text-sm font-semibold text-gray-900">
+                            {service.name}
                           </p>
-                          <h3 className="text-xl font-black text-gray-900 group-hover:text-yellow-600 transition-all mb-3 line-clamp-2">
-                            {project.title}
-                          </h3>
-                          <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                            {project.description}
+                          <p className="text-xs text-gray-600">
+                            {service.subServices.length} services
                           </p>
-                         
-                          {/* Results */}
-                          <div className="space-y-2 mb-5 flex-1">
-                            {project.results.map((result, idx) => (
-                              <div
-                                key={idx}
-                                className="flex items-center gap-2"
-                              >
-                                <Check size={16} className="text-green-600 shrink-0" />
-                                <p className="text-xs text-gray-700 font-medium">{result}</p>
-                              </div>
-                            ))}
-                          </div>
-                          {/* CTA */}
-                          <button className="w-full py-3 bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg group-hover:scale-105">
-                            View Project
-                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                          </button>
                         </div>
                       </div>
+                    </div>
+
+                    <motion.div
+                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown
+                        size={18}
+                        className={someSelected ? 'text-[#fec107]' : 'text-gray-600'}
+                      />
                     </motion.div>
-                  ))}
-                </motion.div>
-              ) : (
+                  </button>
+
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="border-t-2 border-gray-200 bg-white p-4 space-y-3"
+                      >
+                        {service.subServices.map((subService) => {
+                          const isChecked =
+                            selectedFilters[`${service.id}-${subService.id}`];
+                          const projectCount = allProjects.filter(
+                            p =>
+                              p.mainService === service.id &&
+                              p.subService === subService.id
+                          ).length;
+
+                          return (
+                            <label
+                              key={subService.id}
+                              className="flex items-center gap-3 cursor-pointer group"
+                            >
+                              <input
+                                type="checkbox"
+                                checked={isChecked}
+                                onChange={() =>
+                                  toggleFilter(service.id, subService.id)
+                                }
+                                className="w-4 h-4 rounded accent-[#fec107]"
+                              />
+                              <span
+                                className={`text-sm flex-1 group-hover:text-[#fec107] transition-colors ${
+                                  isChecked
+                                    ? 'text-[#fec107] font-semibold'
+                                    : 'text-gray-700'
+                                }`}
+                              >
+                                {subService.name}
+                              </span>
+                              <span className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded font-semibold">
+                                {projectCount}
+                              </span>
+                            </label>
+                          );
+                        })}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </motion.aside>
+
+      {/* Projects Section */}
+      <div className="">
+        {/* Mobile filter toggle button */}
+        <div className="flex justify-between items-center mb-8 md:hidden">
+          <h2 className="text-4xl font-black text-gray-900 mb-2">
+            {/* Your title if needed */}
+          </h2>
+          <button
+            onClick={toggleMobileFilters}
+            className="flex items-center gap-2 px-4 py-2 bg-[#fec107] hover:bg-[#e0b200] text-black font-bold rounded-lg transition-all shadow-md"
+          >
+            <Filter size={20} />
+            {mobileFilterOpen ? 'Close' : 'Filters'}
+          </button>
+        </div>
+
+        {/* Desktop header */}
+        <div className="hidden md:flex md:justify-between md:items-center mb-8">
+          <h2 className="text-4xl font-black text-gray-900 mb-2">
+            {/* Your title if needed */}
+          </h2>
+          {activeFilterCount > 0 && (
+            <p className="text-gray-600 text-sm">Filtering by {activeFilterCount} service{activeFilterCount !== 1 ? 's' : ''}</p>
+          )}
+        </div>
+
+        {mobileFilterOpen && (
+          <p className="text-gray-600 text-sm mb-4 md:hidden">
+            Filtering by {activeFilterCount} service{activeFilterCount !== 1 ? 's' : ''}
+          </p>
+        )}
+
+        <AnimatePresence mode="wait">
+          {filteredProjects.length > 0 ? (
+            <motion.div
+              key="projects-list"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8"
+            >
+              {filteredProjects.map((project, index) => (
                 <motion.div
-                  key="no-projects"
+                  key={project.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex flex-col items-center justify-center py-24 text-center"
+                  transition={{ delay: index * 0.05 }}
+                  whileHover={{ y: -8 }}
+                  className="group cursor-pointer h-full"
                 >
-                  <div className="text-7xl mb-6 text-gray-300">
-                    <Search size={80} />
+                  <div className="relative bg-white rounded-2xl overflow-hidden border-2 border-gray-200 hover:border-[#fec107] transition-all duration-300 h-full flex flex-col shadow-lg hover:shadow-2xl">
+                    {/* Image */}
+                    <div className="relative h-56 overflow-hidden bg-gray-100">
+                      <motion.img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.4 }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                     
+                      {/* Badge */}
+                      <div className="absolute top-4 right-4 bg-[#fec107] text-black px-4 py-2 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
+                        <Award size={14} />
+                        {project.year}
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6 flex-1 flex flex-col bg-white">
+                      <p className="text-xs font-bold text-[#fec107] uppercase tracking-widest mb-3">
+                        {project.client}
+                      </p>
+                      <h3 className="text-xl font-black text-gray-900 group-hover:text-[#fec107] transition-all mb-3 line-clamp-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                        {project.description}
+                      </p>
+                     
+                      {/* Results */}
+                      <div className="space-y-2 mb-5 flex-1">
+                        {project.results.map((result, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-center gap-2"
+                          >
+                            <Check size={16} className="text-green-600 shrink-0" />
+                            <p className="text-xs text-gray-700 font-medium">{result}</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* CTA */}
+                      <button className="w-full py-3 bg-[#fec107] hover:bg-[#e0b200] text-black font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg group-hover:scale-105">
+                        View Project
+                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                      </button>
+                    </div>
                   </div>
-                  <p className="text-2xl font-bold text-gray-900 mb-2">No projects found</p>
-                  <p className="text-gray-600 mb-8 max-w-sm">Adjust your filters to discover more amazing work</p>
-                  <button
-                    onClick={clearAllFilters}
-                    className="px-8 py-3 bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-bold rounded-xl transition-all shadow-lg"
-                  >
-                    Clear All Filters
-                  </button>
                 </motion.div>
-              )}
-            </AnimatePresence>
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div
+              key="no-projects"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="flex flex-col items-center justify-center py-24 text-center"
+            >
+              <div className="text-7xl mb-6 text-gray-300">
+                <Search size={80} />
+              </div>
+              <p className="text-2xl font-bold text-gray-900 mb-2">No projects found</p>
+              <p className="text-gray-600 mb-8 max-w-sm">Adjust your filters to discover more amazing work</p>
+              <button
+                onClick={clearAllFilters}
+                className="px-8 py-3 bg-[#fec107] hover:bg-[#e0b200] text-black font-bold rounded-xl transition-all shadow-lg"
+              >
+                Clear All Filters
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  </div>
+
+  {/* Footer */}
+  <footer className="bg-gray-900 text-white py-12 mt-20">
+    <div className="max-w-7xl mx-auto px-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 bg-[#fec107] rounded-lg">
+              <Sparkles className="text-black" size={24} />
+            </div>
+            <h3 className="text-xl font-bold">DiWebz Technology</h3>
           </div>
+          <p className="text-gray-400 text-sm">
+            Transforming ideas into award-winning digital experiences since 2020.
+          </p>
+        </div>
+        <div>
+          <h4 className="font-bold mb-4 text-[#fec107]">Quick Links</h4>
+          <ul className="space-y-2 text-sm text-gray-400">
+            <li><a href="#" className="hover:text-[#fec107] transition-colors">About Us</a></li>
+            <li><a href="#" className="hover:text-[#fec107] transition-colors">Services</a></li>
+            <li><a href="#" className="hover:text-[#fec107] transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-bold mb-4 text-[#fec107]">Contact Info</h4>
+          <ul className="space-y-2 text-sm text-gray-400">
+            <li>Email: info@diwebz.com</li>
+            <li>Phone: +92 300 1234567</li>
+            <li>Location: Islamabad, PK</li>
+          </ul>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 mt-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-linear-to-br from-yellow-400 to-yellow-600 rounded-lg">
-                  <Sparkles className="text-white" size={24} />
-                </div>
-                <h3 className="text-xl font-bold">DiWebz Technology</h3>
-              </div>
-              <p className="text-gray-400 text-sm">
-                Transforming ideas into award-winning digital experiences since 2020.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4 text-yellow-400">Quick Links</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-yellow-400 transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-yellow-400 transition-colors">Services</a></li>
-                <li><a href="#" className="hover:text-yellow-400 transition-colors">Contact</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4 text-yellow-400">Contact Info</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>Email: info@diwebz.com</li>
-                <li>Phone: +1 (555) 123-4567</li>
-                <li>Location: Global</li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
-            <p>&copy; {new Date().getFullYear()} DiWebz Technology. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+        <p>© {new Date().getFullYear()} DiWebz Technology. All rights reserved.</p>
+      </div>
     </div>
+  </footer>
+</div>
   );
 };
 

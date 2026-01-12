@@ -406,7 +406,7 @@ function ProcessSpecificContent({ processKey, process }: { processKey: string; p
       {processKey === 'our-process' && (
         <>
           <div className="my-20">
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -416,7 +416,50 @@ function ProcessSpecificContent({ processKey, process }: { processKey: string; p
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 From initial discovery to ongoing optimization, we follow a structured approach that ensures success at every stage.
               </p>
-            </motion.div>
+            </motion.div> */}
+
+            <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="text-center mb-12"
+>
+  {/* Top Label */}
+  <motion.span
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block mb-4"
+    style={{ color: "#fec107" }}
+  >
+    Our Proven Process
+  </motion.span>
+
+  {/* Heading with extra line */}
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    4-Phase Approach{" "}
+    <span style={{ color: "#fec107" }}>
+      That Ensures Success
+    </span>
+  </motion.h2>
+
+  {/* Subtitle */}
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.2 }}
+    className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+  >
+    From initial discovery to ongoing optimization, we follow a structured approach that ensures success at every stage.
+  </motion.p>
+</motion.div>
+
             <div className="space-y-8">
               {processSteps.map((step, i) => {
                 const Icon = step.icon;
@@ -473,31 +516,46 @@ function ProcessSpecificContent({ processKey, process }: { processKey: string; p
           </div>
           <OurProcessSection />
           <ClientTestimonialsSection />
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`my-20 bg-gradient-to-r ${process.color} text-white p-12 rounded-2xl text-center`}
-          >
-            <h3 className="text-3xl font-black mb-4">Ready to start your project?</h3>
-            <p className="mb-8 text-indigo-100 text-lg">
-              Let&apos;s discuss how our process can bring your vision to life.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-indigo-600 hover:bg-gray-100 px-10 py-4 rounded-xl font-bold shadow-xl transition-all inline-flex items-center gap-3"
-            >
-              Schedule Discovery Call
-              <ArrowRight size={20} />
-            </motion.button>
-          </motion.div>
+         <motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="my-20 bg-gradient-to-r from-[#fec107] via-[#FFD54F] to-[#FFD700] p-12 md:p-16 rounded-3xl text-center relative overflow-hidden"
+>
+  <div className="relative z-10">
+    {/* Heading */}
+    <h3 className="text-3xl md:text-4xl font-black text-black mb-4">
+      Ready to start your project?
+    </h3>
+
+    {/* Paragraph */}
+    <p className="mb-8 text-black text-lg max-w-2xl mx-auto">
+      Let&apos;s discuss how our process can bring your vision to life.
+    </p>
+
+    {/* Button */}
+    <motion.button
+      whileHover={{ scale: 1.05, y: -4 }}
+      whileTap={{ scale: 0.95 }}
+      className="inline-flex items-center justify-center gap-3 bg-black text-yellow-500 px-10 py-4 rounded-xl font-bold shadow-xl hover:text-white transition-colors duration-300"
+    >
+      Schedule Discovery Call
+      <motion.div
+        animate={{ x: [0, 4, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+      >
+        <ArrowRight size={20} />
+      </motion.div>
+    </motion.button>
+  </div>
+</motion.div>
+
         </>
       )}
       {processKey === 'resources' && (
         <>
           <div className="my-20 text-center">
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -506,7 +564,49 @@ function ProcessSpecificContent({ processKey, process }: { processKey: string; p
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Explore our collection of case studies, testimonials, insights, and in-depth guides.
               </p>
-            </motion.div>
+            </motion.div> */}
+            <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="text-center mb-12"
+>
+  {/* Top Label */}
+  <motion.span
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block mb-4"
+    style={{ color: "#fec107" }}
+  >
+    Knowledge & Resources
+  </motion.span>
+
+  {/* Heading with extra line */}
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    Explore Our{" "}
+    <span style={{ color: "#fec107" }}>
+      Insights & Guides
+    </span>
+  </motion.h2>
+
+  {/* Subtitle */}
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.2 }}
+    className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+  >
+    Explore our collection of case studies, testimonials, insights, and in-depth guides.
+  </motion.p>
+</motion.div>
+
           </div>
           <div className="my-20 grid md:grid-cols-2 gap-8">
             {resources.map((resource, i) => {
@@ -565,38 +665,52 @@ function ProcessSpecificContent({ processKey, process }: { processKey: string; p
             })}
           </div>
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`my-20 bg-gradient-to-r ${process.color} text-white p-12 rounded-2xl`}
-          >
-            <div className="max-w-2xl mx-auto text-center">
-              <h3 className="text-3xl font-black mb-3">Stay Updated</h3>
-              <p className="mb-8 text-purple-100 text-lg">
-                Get the latest insights and updates delivered to your inbox.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-purple-500"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="bg-white text-purple-600 px-6 py-3 rounded-lg font-bold"
-                >
-                  Subscribe
-                </motion.button>
-              </div>
-            </div>
-          </motion.div>
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="my-20 bg-gradient-to-r from-[#fec107] via-[#FFD54F] to-[#FFD700] p-12 md:p-16 rounded-3xl text-center relative overflow-hidden"
+>
+  <div className="max-w-2xl mx-auto relative z-10">
+    {/* Heading */}
+    <h3 className="text-3xl md:text-4xl font-black text-black mb-3">
+      Stay Updated
+    </h3>
+
+    {/* Paragraph */}
+    <p className="mb-8 text-black text-lg">
+      Get the latest insights and updates delivered to your inbox.
+    </p>
+
+    {/* Input + Button */}
+    <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+      <input
+        type="email"
+        placeholder="Enter your email"
+        className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-yellow-500 outline-none"
+      />
+      <motion.button
+        whileHover={{ scale: 1.05, y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        className="inline-flex items-center justify-center gap-3 bg-black text-yellow-500 px-6 py-3 rounded-xl font-bold shadow-xl hover:text-white transition-colors duration-300"
+      >
+        Subscribe
+        <motion.div
+          animate={{ x: [0, 4, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          <ArrowRight size={20} />
+        </motion.div>
+      </motion.button>
+    </div>
+  </div>
+</motion.div>
+
         </>
       )}
       {processKey === 'technology' && (
         <>
           <div className="my-20 text-center">
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -605,7 +719,50 @@ function ProcessSpecificContent({ processKey, process }: { processKey: string; p
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 We leverage the latest technologies to build scalable, secure, and high-performance solutions.
               </p>
-            </motion.div>
+            </motion.div> */}
+
+            <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="text-center mb-12"
+>
+  {/* Top Label */}
+  <motion.span
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block mb-4"
+    style={{ color: "#fec107" }}
+  >
+    Our Technology Stack
+  </motion.span>
+
+  {/* Heading with extra line */}
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    Leveraging Modern{" "}
+    <span style={{ color: "#fec107" }}>
+      Technologies
+    </span>
+  </motion.h2>
+
+  {/* Subtitle */}
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.2 }}
+    className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+  >
+    We leverage the latest technologies to build scalable, secure, and high-performance solutions.
+  </motion.p>
+</motion.div>
+
           </div>
           <div className="my-20 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {technologies.map((tech, i) => {
@@ -637,28 +794,43 @@ function ProcessSpecificContent({ processKey, process }: { processKey: string; p
             })}
           </div>
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`my-20 bg-gradient-to-r ${process.color} text-white p-12 rounded-2xl text-center`}
-          >
-            <h3 className="text-3xl font-black mb-4">Ready to Build with Cutting-Edge Tech?</h3>
-            <p className="mb-8 text-emerald-100 text-lg">
-              Let&apos;s discuss the best technology stack for your project.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-green-600 hover:bg-gray-100 px-10 py-4 rounded-xl font-bold shadow-xl transition-all inline-flex items-center gap-3"
-            >
-              Explore Tech Consultation
-              <ArrowRight size={20} />
-            </motion.button>
-          </motion.div>
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="my-20 bg-gradient-to-r from-[#fec107] via-[#FFD54F] to-[#FFD700] p-12 md:p-16 rounded-3xl text-center relative overflow-hidden"
+>
+  <div className="relative z-10">
+    {/* Heading */}
+    <h3 className="text-3xl md:text-4xl font-black text-black mb-4">
+      Ready to Build with Cutting-Edge Tech?
+    </h3>
+
+    {/* Paragraph */}
+    <p className="mb-8 text-black text-lg max-w-2xl mx-auto">
+      Let&apos;s discuss the best technology stack for your project.
+    </p>
+
+    {/* Button */}
+    <motion.button
+      whileHover={{ scale: 1.05, y: -4 }}
+      whileTap={{ scale: 0.95 }}
+      className="inline-flex items-center justify-center gap-3 bg-black text-yellow-500 px-10 py-4 rounded-xl font-bold shadow-xl hover:text-white transition-colors duration-300"
+    >
+      Explore Tech Consultation
+      <motion.div
+        animate={{ x: [0, 4, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+      >
+        <ArrowRight size={20} />
+      </motion.div>
+    </motion.button>
+  </div>
+</motion.div>
+
         </>
       )}
       {/* Global Footer CTA */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -679,7 +851,69 @@ function ProcessSpecificContent({ processKey, process }: { processKey: string; p
             <ArrowRight size={20} />
           </motion.a>
         </div>
-      </motion.div>
+      </motion.div> */}
+
+      <motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="my-20 pt-12 border-t border-gray-200"
+>
+  <div className="text-center">
+    {/* Top Label */}
+    <motion.span
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block mb-4"
+      style={{ color: "#fec107" }}
+    >
+      Get Started Today
+    </motion.span>
+
+    {/* Heading with extra line */}
+    <motion.h3
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.1 }}
+      className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight"
+      style={{ color: "#000000" }}
+    >
+      Ready to Transform Your{" "}
+      <span style={{ color: "#fec107" }}>
+        Business?
+      </span>
+    </motion.h3>
+
+    {/* Subtitle */}
+    <motion.p
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.2 }}
+      className="text-gray-600 text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed"
+    >
+      Let&apos;s discuss how DPWebz can help you achieve your digital goals with innovative solutions.
+    </motion.p>
+
+    {/* CTA Button */}
+   <motion.a
+  href="#connect"
+  whileHover={{ scale: 1.05, y: -4 }}
+  whileTap={{ scale: 0.95 }}
+  className="inline-flex items-center justify-center gap-3 bg-black text-yellow-500 px-10 py-4 rounded-xl font-bold shadow-xl hover:text-white transition-colors duration-300"
+>
+  Start Your Project
+  <motion.div
+    animate={{ x: [0, 4, 0] }}
+    transition={{ duration: 1.5, repeat: Infinity }}
+  >
+    <ArrowRight size={20} />
+  </motion.div>
+</motion.a>
+
+  </div>
+</motion.div>
+
     </div>
   );
 }

@@ -436,7 +436,7 @@ export default function ServicesSection() {
       </div>
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <motion.div
+        {/* <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -473,7 +473,47 @@ export default function ServicesSection() {
           >
             From concept to execution, we deliver world-class digital solutions that drive real results for your business
           </motion.p>
-        </motion.div>
+        </motion.div> */}
+
+        <motion.div
+  className="text-center mb-20"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+>
+  <motion.span
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block"
+    style={{ color: "#fec107" }}
+  >
+    What We Do
+  </motion.span>
+
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    Empowering Your{" "}
+    <span style={{ color: "#fec107" }}>
+      Digital Journey
+    </span>
+  </motion.h2>
+
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.2 }}
+    className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+  >
+    From concept to execution, we deliver world-class digital solutions that drive real results for your business
+  </motion.p>
+</motion.div>
+
         {/* Services Grid */}
         <motion.div
           variants={containerVariants}

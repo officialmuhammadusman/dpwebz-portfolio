@@ -45,7 +45,7 @@ export default function CallToActionSection() {
 
       <div className="max-w-7xl mx-auto relative">
         {/* Header */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -84,7 +84,47 @@ export default function CallToActionSection() {
           >
             Let&apos;s discuss your vision and build something amazing together
           </motion.p>
-        </motion.div>
+        </motion.div> */}
+
+        <motion.div
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  className="text-center mb-20"
+>
+  <motion.span
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block"
+    style={{ color: "#fec107" }}
+  >
+    Get Started Today
+  </motion.span>
+
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    Ready to Transform Your{" "}
+    <span style={{ color: "#fec107" }}>
+      Business?
+    </span>
+  </motion.h2>
+
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.2 }}
+    className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto"
+  >
+    Let&apos;s discuss your vision and build something amazing together
+  </motion.p>
+</motion.div>
+
 
         {/* Main Content */}
         <motion.div

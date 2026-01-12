@@ -523,7 +523,7 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
   return (
     <div className="max-w-7xl mx-auto px-4">
       {/* Featured Case Study */}
-      <div className="my-20 bg-linear-to-br from-gray-50 to-white p-8 md:p-12 rounded-2xl border border-gray-200">
+      {/* <div className="my-20 bg-linear-to-br from-gray-50 to-white p-8 md:p-12 rounded-2xl border border-gray-200">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -611,11 +611,193 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
             </motion.div>
           </div>
         </motion.div>
+      </div> */}
+
+
+      <div className="my-20 bg-gradient-to-br from-gray-50 to-white p-8 md:p-16 rounded-3xl shadow-xl border border-gray-100">
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+  >
+    {/* Header */}
+    {/* <div className="text-center mb-12">
+      <motion.span
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        className="inline-block px-6 py-2 text-sm font-bold uppercase tracking-widest mb-6 rounded-full bg-yellow-50"
+        style={{ color: "#fec107" }}
+      >
+        Featured Success Story
+      </motion.span>
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1 }}
+        className="text-4xl md:text-5xl font-black mb-4"
+        style={{ color: "#000000" }}
+      >
+        {client.featuredCaseStudy.title}
+      </motion.h2>
+      <p className="text-gray-600 text-lg">
+        {client.featuredCaseStudy.client} • {client.featuredCaseStudy.industry}
+      </p>
+      <div className="flex justify-center mt-4">
+        <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: '#fec107' }}>
+          <div className="w-8 h-8 rounded-full bg-blue-500 border-4 border-white"></div>
+        </div>
       </div>
+    </div> */}
+
+    <div className="text-center mb-12">
+  {/* Top Label */}
+  <motion.span
+    initial={{ opacity: 0, scale: 0.9 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+    className="inline-block px-6 py-2 text-sm font-bold uppercase tracking-widest mb-6"
+    style={{ color: "#fec107" }}
+  >
+    Featured Success Story
+  </motion.span>
+
+  {/* Heading */}
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    {client.featuredCaseStudy.title}{" "}
+    <span style={{ color: "#fec107" }}>
+      Success Story
+    </span>
+  </motion.h2>
+
+  {/* Subtitle */}
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.2 }}
+    className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+  >
+    {client.featuredCaseStudy.client} • {client.featuredCaseStudy.industry}
+  </motion.p>
+
+  {/* Decorative Circle */}
+  <div className="flex justify-center mt-6">
+    <div
+      className="w-16 h-16 rounded-full flex items-center justify-center"
+      style={{ backgroundColor: "#fec107" }}
+    >
+      <div className="w-8 h-8 rounded-full bg-blue-500 border-4 border-white"></div>
+    </div>
+  </div>
+</div>
+
+
+    {/* Content */}
+    <div className="grid lg:grid-cols-2 gap-8 items-start">
+      {/* Left Side - Image */}
+      <motion.div
+        initial={{ opacity: 0, x: -30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2 }}
+        className="h-full flex flex-col"
+      >
+        <div className="relative h-full min-h-[500px] lg:min-h-[600px]">
+          <Image
+            src={client.featuredCaseStudy.image}
+            alt={client.featuredCaseStudy.title}
+            width={1200}
+            height={768}
+            className="w-full h-full object-cover rounded-2xl shadow-2xl"
+            priority
+          />
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/20 to-transparent"></div>
+        </div>
+      </motion.div>
+
+      {/* Right Side - Content */}
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3 }}
+        className="h-full flex flex-col justify-between space-y-8"
+      >
+        {/* Challenge */}
+        <div className="bg-white p-6 rounded-xl shadow-md border-l-4" style={{ borderLeftColor: '#fec107' }}>
+          <h3 className="text-base font-bold uppercase mb-3 tracking-wider" style={{ color: "#000000" }}>
+            Challenge
+          </h3>
+          <p className="text-gray-700 leading-relaxed text-base">{client.featuredCaseStudy.challenge}</p>
+        </div>
+
+        {/* Solution */}
+        <div className="bg-white p-6 rounded-xl shadow-md border-l-4" style={{ borderLeftColor: '#fec107' }}>
+          <h3 className="text-base font-bold uppercase mb-3 tracking-wider" style={{ color: "#000000" }}>
+            Solution
+          </h3>
+          <p className="text-gray-700 leading-relaxed text-base">{client.featuredCaseStudy.solution}</p>
+        </div>
+
+        {/* Results */}
+        <div className="bg-white p-6 rounded-xl shadow-md border-l-4" style={{ borderLeftColor: '#fec107' }}>
+          <h3 className="text-base font-bold uppercase mb-4 tracking-wider" style={{ color: "#000000" }}>
+            Results
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {client.featuredCaseStudy.results.map((result: string, i: number) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 + i * 0.05 }}
+                className="flex items-start gap-3 bg-yellow-50 p-3 rounded-lg"
+              >
+                <CheckCircle2 className="flex-shrink-0 mt-0.5" style={{ color: '#fec107' }} size={20} />
+                <span className="text-gray-800 font-medium text-sm leading-relaxed">{result}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Testimonial */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+          className="bg-gradient-to-r from-yellow-50 to-white p-8 rounded-2xl border-l-4 shadow-lg"
+          style={{ borderLeftColor: '#fec107' }}
+        >
+          <div className="flex items-start gap-3 mb-4">
+            <span className="text-5xl font-serif" style={{ color: '#fec107' }}></span>
+            <p className="text-gray-800 italic text-lg leading-relaxed pt-2">
+              {client.featuredCaseStudy.testimonial}
+            </p>
+          </div>
+          <p className="text-sm font-bold pl-8" style={{ color: "#000000" }}>
+            — {client.featuredCaseStudy.author}
+          </p>
+        </motion.div>
+      </motion.div>
+    </div>
+  </motion.div>
+</div>
 
       {/* Categories/Solutions Breakdown */}
       <div className="my-20">
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -629,7 +811,54 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
           <p className="text-gray-600 max-w-2xl mx-auto">
             Comprehensive solutions tailored to your specific needs
           </p>
-        </motion.div>
+        </motion.div> */}
+
+        <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="text-center mb-12"
+>
+  {/* Top Label */}
+  <motion.span
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block mb-4"
+    style={{ color: "#fec107" }}
+  >
+    {clientKey === 'industries' ? 'Industry Solutions' :
+     clientKey === 'business-size' ? 'Packages by Size' :
+     'Our Approach'}
+  </motion.span>
+
+  {/* Heading with extra line */}
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    {clientKey === 'industries' ? 'Transforming Industries' :
+     clientKey === 'business-size' ? 'Tailored Packages' :
+     'Strategic Approach'}{" "}
+    <span style={{ color: "#fec107" }}>
+      for Your Business
+    </span>
+  </motion.h2>
+
+  {/* Subtitle */}
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.2 }}
+    className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+  >
+    Comprehensive solutions tailored to your specific needs and goals
+  </motion.p>
+</motion.div>
+
         <div className="grid md:grid-cols-2 gap-8">
           {client.categories.map((category, i: number) => (
             <motion.div
@@ -682,7 +911,7 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
 
       {/* Benefits Section */}
       <div className="my-20 bg-linear-to-br from-gray-50 to-white p-12 rounded-2xl border border-gray-200">
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -703,7 +932,59 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
+
+        <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="flex flex-col items-center text-center"
+>
+  {/* Top Label */}
+  <motion.span
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block mb-4"
+    style={{ color: "#fec107" }}
+  >
+    Why Choose Us
+  </motion.span>
+
+  {/* Heading */}
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    Trusted Expertise{" "}
+    <span style={{ color: "#fec107" }}>
+      That Delivers Results
+    </span>
+  </motion.h2>
+
+  {/* Benefits Grid */}
+  <div className="grid md:grid-cols-3 gap-4 w-full text-left">
+    {client.benefits.map((benefit: string, i: number) => (
+      <motion.div
+        key={i}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: i * 0.05 }}
+        className="flex items-center gap-3 p-4 bg-white rounded-lg border border-gray-200"
+      >
+        <Award size={18} className="text-[#fec107] shrink-0" />
+        <span className="font-medium text-gray-900 text-sm">
+          {benefit}
+        </span>
+      </motion.div>
+    ))}
+  </div>
+</motion.div>
+
       </div>
 
       {/* Testimonials Section */}
@@ -711,7 +992,7 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
 
       {/* FAQ Section */}
       <div className="my-20">
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -719,7 +1000,50 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
         >
           <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Frequently Asked Questions</h2>
           <p className="text-gray-600">Everything you need to know</p>
-        </motion.div>
+        </motion.div> */}
+
+        <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="text-center mb-12"
+>
+  {/* Top Label */}
+  <motion.span
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block mb-4"
+    style={{ color: "#fec107" }}
+  >
+    Frequently Asked Questions
+  </motion.span>
+
+  {/* Heading with extra line */}
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    Everything You Need{" "}
+    <span style={{ color: "#fec107" }}>
+      to Know
+    </span>
+  </motion.h2>
+
+  {/* Subtitle */}
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.2 }}
+    className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+  >
+    Find answers to common questions about our services, processes, and solutions
+  </motion.p>
+</motion.div>
+
         <div className="max-w-3xl mx-auto space-y-4">
           {client.faqs.map((faq, i: number) => (
             <motion.div
@@ -738,26 +1062,41 @@ function ClientSpecificContent({ clientKey }: { clientKey: string }) {
       </div>
 
       {/* CTA Section */}
+    <motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="bg-gradient-to-r from-[#fec107] via-[#FFD54F] to-[#FFD700] rounded-3xl p-12 md:p-16 text-center my-20 relative overflow-hidden"
+>
+  <div className="relative z-10">
+    {/* Heading */}
+    <h2 className="text-3xl md:text-4xl font-black text-black mb-4">
+      Ready to Get Started?
+    </h2>
+
+    {/* Paragraph */}
+    <p className="text-black text-lg mb-8 max-w-2xl mx-auto">
+      Let&apos;s discuss your needs and create a solution that drives real results.
+    </p>
+
+    {/* Button */}
+    <motion.a
+      href="#contact"
+      whileHover={{ scale: 1.05, y: -4 }}
+      whileTap={{ scale: 0.95 }}
+      className="inline-flex items-center justify-center gap-3 bg-black text-yellow-500 px-10 py-4 rounded-xl font-bold shadow-xl hover:text-white transition-colors duration-300"
+    >
+      Schedule Free Consultation
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className={`bg-linear-to-r ${client.color} text-white rounded-2xl p-12 text-center my-20`}
+        animate={{ x: [0, 4, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
       >
-        <h2 className="text-3xl md:text-4xl font-black mb-4">Ready to Get Started?</h2>
-        <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-          Let&apos;s discuss your needs and create a solution that drives real results.
-        </p>
-        <motion.a
-          href="#contact"
-          whileHover={{ scale: 1.05, y: -4 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center gap-3 bg-white text-gray-900 px-10 py-4 rounded-xl font-bold shadow-xl hover:shadow-2xl transition-all"
-        >
-          Schedule Free Consultation
-          <ArrowRight size={20} />
-        </motion.a>
+        <ArrowRight size={20} />
       </motion.div>
+    </motion.a>
+  </div>
+</motion.div>
+
     </div>
   );
 }

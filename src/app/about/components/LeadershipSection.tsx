@@ -27,7 +27,7 @@ export default function LeadershipSection() {
     <>
       {/* Leadership Intro */}
       <div className="my-20 text-center">
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -36,7 +36,44 @@ export default function LeadershipSection() {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Visionary leaders with decades of combined experience driving innovation and excellence.
           </p>
-        </motion.div>
+        </motion.div> */}
+        <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="text-center mb-12"
+>
+  {/* Top Label */}
+  <motion.span
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block mb-4"
+    style={{ color: "#fec107" }}
+  >
+    Meet the Team
+  </motion.span>
+
+  {/* Heading with extra line */}
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    Our Leadership{" "}
+    <span style={{ color: "#fec107" }}>
+      Team
+    </span>
+  </motion.h2>
+
+  {/* Paragraph */}
+  <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+    Visionary leaders with decades of combined experience driving innovation and excellence.
+  </p>
+</motion.div>
+
       </div>
 
       {/* Leadership Cards Slider */}
@@ -117,24 +154,40 @@ export default function LeadershipSection() {
         </div>
       </div>
 
+    <motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="my-20 bg-gradient-to-r from-[#fec107] via-[#FFD54F] to-[#FFD700] p-12 md:p-16 rounded-3xl text-center relative overflow-hidden"
+>
+  <div className="relative z-10">
+    {/* Heading */}
+    <h3 className="text-3xl md:text-4xl font-black text-black mb-4">
+      Join Our Growing Team
+    </h3>
+
+    {/* Paragraph */}
+    <p className="mb-8 text-black text-lg max-w-2xl mx-auto">
+      We&apos;re always looking for talented individuals to join our mission.
+    </p>
+
+    {/* Button */}
+    <motion.button
+      whileHover={{ scale: 1.05, y: -4 }}
+      whileTap={{ scale: 0.95 }}
+      className="inline-flex items-center justify-center gap-3 bg-black text-yellow-500 px-10 py-4 rounded-xl font-bold shadow-xl hover:text-white transition-colors duration-300"
+    >
+      View Open Positions
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="my-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white p-12 rounded-2xl text-center"
+        animate={{ x: [0, 4, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
       >
-        <h3 className="text-3xl font-black mb-4">Join Our Growing Team</h3>
-        <p className="mb-8 text-purple-100 text-lg">
-          We&apos;re always looking for talented individuals to join our mission.
-        </p>
-        <motion.button
-          whileHover={{ scale: 1.05, y: -2 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-white text-purple-600 hover:bg-gray-100 px-10 py-4 rounded-xl font-bold shadow-xl transition-all"
-        >
-          View Open Positions
-        </motion.button>
+        <ArrowRight size={20} />
       </motion.div>
+    </motion.button>
+  </div>
+</motion.div>
+
     </>
   );
 }

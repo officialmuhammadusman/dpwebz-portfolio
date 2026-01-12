@@ -217,7 +217,7 @@ export default function OurProcessSection() {
 
       <div className="max-w-7xl mx-auto relative">
         {/* Section Header */}
-        <motion.div
+        {/* <motion.div
           className="text-center mb-24"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -256,7 +256,46 @@ export default function OurProcessSection() {
           >
             A proven methodology that transforms your vision into reality
           </motion.p>
-        </motion.div>
+        </motion.div> */}
+        <motion.div
+  className="text-center mb-24"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+>
+  <motion.span
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="px-4 py-2 font-bold text-xl uppercase tracking-widest inline-block"
+    style={{ color: "#fec107" }}
+  >
+    How We Work
+  </motion.span>
+
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    Our Strategic{" "}
+    <span style={{ color: "#fec107" }}>
+      Process
+    </span>
+  </motion.h2>
+
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.2 }}
+    className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto"
+  >
+    A proven methodology that transforms your vision into reality
+  </motion.p>
+</motion.div>
+
 
         {/* Process Steps */}
         <motion.div
@@ -329,62 +368,70 @@ export default function OurProcessSection() {
         </motion.div>
 
         {/* CTA Section */}
-        <motion.div
-          className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-12 md:p-16 relative overflow-hidden"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <motion.div className="relative z-10 text-center">
-            <motion.h3
-              initial={{ scale: 0.95, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-black text-white mb-4"
-            >
-              Ready to Begin Your Journey?
-            </motion.h3>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto"
-            >
-              Let&apos;s start your project with our proven process and turn your ideas into reality.
-            </motion.p>
+       <motion.div
+  className="bg-gradient-to-r from-[#fec107] via-[#FFD54F] to-[#FFD700] rounded-3xl p-12 md:p-16 relative overflow-hidden"
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8, delay: 0.2 }}
+>
+  <motion.div className="relative z-10 text-center">
+    {/* Heading */}
+    <motion.h3
+      initial={{ scale: 0.95, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="text-4xl md:text-5xl font-black text-black mb-4"
+    >
+      Ready to Begin Your Journey?
+    </motion.h3>
 
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.05, y: -4 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-10 py-4 rounded-xl font-bold shadow-xl"
-              >
-                Start Your Project
-                <motion.div
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ArrowRight size={20} />
-                </motion.div>
-              </motion.a>
-              <motion.a
-                href="#portfolio"
-                whileHover={{ scale: 1.05, y: -4 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-3 border-2 border-gray-400 text-white px-10 py-4 rounded-xl font-bold hover:border-white transition-colors"
-              >
-                View Our Work
-              </motion.a>
-            </motion.div>
-          </motion.div>
+    {/* Paragraph */}
+    <motion.p
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ delay: 0.2, duration: 0.6 }}
+      className="text-black text-lg mb-8 max-w-2xl mx-auto"
+    >
+      Let&apos;s start your project with our proven process and turn your ideas into reality.
+    </motion.p>
+
+    {/* Buttons */}
+    <motion.div
+      className="flex flex-col sm:flex-row gap-4 justify-center"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ delay: 0.4, duration: 0.6 }}
+    >
+      {/* Black Button 1 */}
+      <motion.a
+        href="#contact"
+        whileHover={{ scale: 1.05, y: -4 }}
+        whileTap={{ scale: 0.95 }}
+        className="inline-flex items-center justify-center gap-3 bg-black text-yellow-500 px-10 py-4 rounded-xl font-bold shadow-xl hover:text-white transition-colors duration-300"
+      >
+        Start Your Project
+        <motion.div
+          animate={{ x: [0, 4, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          <ArrowRight size={20} />
         </motion.div>
+      </motion.a>
+
+      {/* Black Button 2 */}
+      <motion.a
+        href="#portfolio"
+        whileHover={{ scale: 1.05, y: -4 }}
+        whileTap={{ scale: 0.95 }}
+        className="inline-flex items-center justify-center gap-3 bg-black text-yellow-500 px-10 py-4 rounded-xl font-bold shadow-xl hover:text-white transition-colors duration-300"
+      >
+        View Our Work
+      </motion.a>
+    </motion.div>
+  </motion.div>
+</motion.div>
+
       </div>
     </section>
   );

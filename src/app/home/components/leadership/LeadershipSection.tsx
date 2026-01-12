@@ -623,7 +623,7 @@ export default function LeadershipSection() {
 
       <div className="max-w-7xl mx-auto relative">
         {/* Header */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -662,7 +662,48 @@ export default function LeadershipSection() {
           >
             Meet the passionate innovators and strategists shaping the future of digital excellence
           </motion.p>
-        </motion.div>
+        </motion.div> */}
+
+
+        <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="text-center mb-20"
+>
+  <motion.span
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="px-4 py-2 font-bold text-lg uppercase tracking-widest inline-block"
+    style={{ color: "#fec107" }}
+  >
+    Our Leadership
+  </motion.span>
+
+  <motion.h2
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight"
+    style={{ color: "#000000" }}
+  >
+    Visionary Leaders{" "}
+    <span style={{ color: "#fec107" }}>
+      Driving Excellence
+    </span>
+  </motion.h2>
+
+  <motion.p
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.2 }}
+    className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto"
+  >
+    Meet the passionate innovators and strategists shaping the future of digital excellence
+  </motion.p>
+</motion.div>
+
 
         {/* Leadership Cards Slider */}
         <motion.div
@@ -759,32 +800,35 @@ export default function LeadershipSection() {
         </motion.div>
 
         {/* Bottom CTA */}
-        <motion.div
-  className="mt-20 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-12 md:p-16 relative overflow-hidden"
+      <motion.div
+  className="mt-20 bg-gradient-to-r from-[#fec107] via-[#FFD54F] to-[#FFD700] rounded-3xl p-12 md:p-16 relative overflow-hidden"
   initial={{ opacity: 0, y: 40 }}
   whileInView={{ opacity: 1, y: 0 }}
   viewport={{ once: true }}
   transition={{ duration: 0.8, delay: 0.2 }}
 >
   <motion.div className="relative z-10 text-center">
+    {/* Heading */}
     <motion.h3
       initial={{ scale: 0.95, opacity: 0 }}
       whileInView={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="text-4xl md:text-5xl font-black text-white mb-4"
+      className="text-4xl md:text-5xl font-black text-black mb-4"
     >
       Join Our Growing Team
     </motion.h3>
 
+    {/* Paragraph */}
     <motion.p
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ delay: 0.2, duration: 0.6 }}
-      className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto"
+      className="text-black text-lg mb-8 max-w-2xl mx-auto"
     >
       We&apos;re always looking for talented individuals to join our mission.
     </motion.p>
 
+    {/* Button */}
     <motion.div
       className="flex justify-center"
       initial={{ opacity: 0 }}
@@ -795,7 +839,7 @@ export default function LeadershipSection() {
         href="#careers"
         whileHover={{ scale: 1.05, y: -4 }}
         whileTap={{ scale: 0.95 }}
-        className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-10 py-4 rounded-xl font-bold shadow-xl"
+        className="inline-flex items-center justify-center gap-3 bg-black text-yellow-500 px-10 py-4 rounded-xl font-bold shadow-xl hover:text-white transition-colors duration-300"
       >
         Explore Careers
         <motion.div

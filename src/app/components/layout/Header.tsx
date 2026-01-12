@@ -1,3 +1,5 @@
+
+
 // 'use client';
 
 // import { useState } from 'react';
@@ -60,8 +62,8 @@
 
 //   const menuItems: MenuItems = {
 //     'What We Do': [
-//        { title: 'Web Design & Development', items: ['Custom Websites (MERN / Laravel)', 'WordPress Development', 'WooCommerce Development', 'SaaS Website Development', 'CMS Development & Integration'] },
-//        { title: 'Automation & AI Services', items: ['Workflow Automation & CRM Integrations', 'AI-Powered Chatbots', 'Payment & Form Processing', 'Custom API Integrations'] },
+//        { title: 'Web Design & Development', items: ['Custom Websites (MERN / Laravel)','SaaS Website Development', 'CMS Development & Integration', 'WordPress Development', 'WooCommerce Development', ] },
+//        { title: 'Automation & AI Services', items: ['AI Agents & Hyper-Automation',  'AI Workflow Automation',' Conversational AI Systems', ' AI Data & Process Automation','Decision Intelligence & Predictive Systems'] },
 
 
 //        { title: 'App Development', items: ['iOS & Android Native Apps', 'Cross-Platform Development', 'UI/UX App Design', 'API Integration & Backend Services'] },
@@ -260,9 +262,12 @@
 //                                   <motion.li key={iIdx} custom={iIdx} initial="hidden" animate="visible" variants={itemVariants}>
 //                                     <button
 //                                       onClick={() => handleServicesSubmenuClick(tabId)}
-//                                       className="text-gray-700 hover:text-black text-sm hover:pl-2 transition-all py-1 block w-full text-left"
+//                                       className="flex items-center gap-2 w-full text-left py-1 transition-colors"
 //                                     >
-//                                       {item}
+//                                       <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
+//                                       <span className="text-gray-700 hover:text-black text-sm hover:pl-1 transition-all">
+//                                         {item}
+//                                       </span>
 //                                     </button>
 //                                   </motion.li>
 //                                 ))}
@@ -288,9 +293,12 @@
 //                                     <motion.li key={iIdx} custom={iIdx} initial="hidden" animate="visible" variants={itemVariants}>
 //                                       <button
 //                                         onClick={() => handleAboutSubmenuClick(itemId)}
-//                                         className="text-gray-700 hover:text-black text-sm hover:pl-2 transition-all py-1 block w-full text-left"
+//                                         className="flex items-center gap-2 w-full text-left py-1 transition-colors"
 //                                       >
-//                                         {item}
+//                                         <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
+//                                         <span className="text-gray-700 hover:text-black text-sm hover:pl-1 transition-all">
+//                                           {item}
+//                                         </span>
 //                                       </button>
 //                                     </motion.li>
 //                                   );
@@ -315,9 +323,12 @@
 //                                   <motion.li key={iIdx} custom={iIdx} initial="hidden" animate="visible" variants={itemVariants}>
 //                                     <button
 //                                       onClick={() => handleClientsSubmenuClick(colId)}
-//                                       className="text-gray-700 hover:text-black text-sm hover:pl-2 transition-all py-1 block w-full text-left"
+//                                       className="flex items-center gap-2 w-full text-left py-1 transition-colors"
 //                                     >
-//                                       {item}
+//                                       <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
+//                                       <span className="text-gray-700 hover:text-black text-sm hover:pl-1 transition-all">
+//                                         {item}
+//                                       </span>
 //                                     </button>
 //                                   </motion.li>
 //                                 ))}
@@ -341,9 +352,12 @@
 //                                   <motion.li key={iIdx} custom={iIdx} initial="hidden" animate="visible" variants={itemVariants}>
 //                                     <button
 //                                       onClick={() => handleProcessSubmenuClick(colId)}
-//                                       className="text-gray-700 hover:text-black text-sm hover:pl-2 transition-all py-1 block w-full text-left"
+//                                       className="flex items-center gap-2 w-full text-left py-1 transition-colors"
 //                                     >
-//                                       {item}
+//                                       <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
+//                                       <span className="text-gray-700 hover:text-black text-sm hover:pl-1 transition-all">
+//                                         {item}
+//                                       </span>
 //                                     </button>
 //                                   </motion.li>
 //                                 ))}
@@ -370,7 +384,7 @@
 //             whileHover={{ y: -2 }}
 //             whileTap={{ scale: 0.95 }}
 //           >
-//             Let's Talk Business
+//             Let&apos;s Talk Business
 //           </motion.button>
 //           <motion.button
 //             onClick={handlePortfolioClick}
@@ -533,9 +547,12 @@
 //                                   <button
 //                                     key={item}
 //                                     onClick={() => handleServicesSubmenuClick(tabId)}
-//                                     className="block text-gray-700 hover:text-black text-sm py-1 text-left w-full"
+//                                     className="flex items-center gap-2 text-gray-700 hover:text-black text-sm py-1 text-left w-full transition-colors"
 //                                   >
-//                                     {item}
+//                                     <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
+//                                     <span className="hover:pl-1 transition-all">
+//                                       {item}
+//                                     </span>
 //                                   </button>
 //                                 ))}
 //                               </div>
@@ -554,9 +571,12 @@
 //                                     <button
 //                                       key={item}
 //                                       onClick={() => handleAboutSubmenuClick(itemId)}
-//                                       className="block text-gray-700 hover:text-black text-sm py-1 text-left w-full"
+//                                       className="flex items-center gap-2 text-gray-700 hover:text-black text-sm py-1 text-left w-full transition-colors"
 //                                     >
-//                                       {item}
+//                                       <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
+//                                       <span className="hover:pl-1 transition-all">
+//                                         {item}
+//                                       </span>
 //                                     </button>
 //                                   );
 //                                 })}
@@ -574,9 +594,12 @@
 //                                   <button
 //                                     key={item}
 //                                     onClick={() => handleClientsSubmenuClick(colId)}
-//                                     className="block text-gray-700 hover:text-black text-sm py-1 text-left w-full"
+//                                     className="flex items-center gap-2 text-gray-700 hover:text-black text-sm py-1 text-left w-full transition-colors"
 //                                   >
-//                                     {item}
+//                                     <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
+//                                     <span className="hover:pl-1 transition-all">
+//                                       {item}
+//                                     </span>
 //                                   </button>
 //                                 ))}
 //                               </div>
@@ -593,9 +616,12 @@
 //                                   <button
 //                                     key={item}
 //                                     onClick={() => handleProcessSubmenuClick(colId)}
-//                                     className="block text-gray-700 hover:text-black text-sm py-1 text-left w-full"
+//                                     className="flex items-center gap-2 text-gray-700 hover:text-black text-sm py-1 text-left w-full transition-colors"
 //                                   >
-//                                     {item}
+//                                     <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
+//                                     <span className="hover:pl-1 transition-all">
+//                                       {item}
+//                                     </span>
 //                                   </button>
 //                                 ))}
 //                               </div>
@@ -615,7 +641,7 @@
 //                   className="block w-full bg-[#fec107] text-black px-6 py-3 rounded-full font-semibold text-center hover:bg-[#eab308]"
 //                   whileTap={{ scale: 0.95 }}
 //                 >
-//                   Let's Talk Business
+//                   Let&apos;s Talk Business
 //                 </motion.button>
 //                 <motion.button
 //                   onClick={handlePortfolioClick}
@@ -636,10 +662,10 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Sun } from 'lucide-react';
+import { ChevronDown, Sun, Moon } from 'lucide-react';
 import Image from 'next/image';
 
 interface MenuItem {
@@ -659,10 +685,35 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('Global');
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState<boolean>(false);
+  const [theme, setTheme] = useState<'light' | 'dark' | undefined>(undefined);
 
   const languages = ['Global', 'MENA', 'KSA - Arabic', 'KSA - English', 'North America', 'Europe & UK'];
 
-  // Mapping for sub-menu hash links
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('theme') as 'light' | 'dark' | null;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = saved || (prefersDark ? 'dark' : 'light');
+      setTheme(initial);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (theme) {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      localStorage.setItem('theme', theme);
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
+
+  // Hash mappings
   const servicesTabMapping: { [key: string]: string } = {
     'Graphic Design': 'graphic-design',
     'Web Design & Development': 'web-development',
@@ -696,26 +747,12 @@ export default function Header() {
 
   const menuItems: MenuItems = {
     'What We Do': [
-       { title: 'Web Design & Development', items: ['Custom Websites (MERN / Laravel)','SaaS Website Development', 'CMS Development & Integration', 'WordPress Development', 'WooCommerce Development', ] },
-       { title: 'Automation & AI Services', items: ['AI Agents & Hyper-Automation',  'AI Workflow Automation',' Conversational AI Systems', ' AI Data & Process Automation','Decision Intelligence & Predictive Systems'] },
-
-
-       { title: 'App Development', items: ['iOS & Android Native Apps', 'Cross-Platform Development', 'UI/UX App Design', 'API Integration & Backend Services'] },
-
-
-
-
-
-
-
+      { title: 'Web Design & Development', items: ['Custom Websites (MERN / Laravel)','SaaS Website Development', 'CMS Development & Integration', 'WordPress Development', 'WooCommerce Development'] },
+      { title: 'Automation & AI Services', items: ['AI Agents & Hyper-Automation', 'AI Workflow Automation',' Conversational AI Systems', ' AI Data & Process Automation','Decision Intelligence & Predictive Systems'] },
+      { title: 'App Development', items: ['iOS & Android Native Apps', 'Cross-Platform Development', 'UI/UX App Design', 'API Integration & Backend Services'] },
       { title: 'Graphic Design', items: ['Logo & Brand Identity', 'UI/UX Mockups & Prototypes', 'Social Media Graphics', 'Product Photography & Retouching'] },
-     
-      
-      
       { title: 'Digital Marketing & SEO', items: ['Comprehensive SEO (On-Page, Off-Page, Technical, Local)', 'Google Ads & PPC Management', 'Social Media Marketing & Advertising', 'Content Strategy & Copywriting'] },
-
-
-      { title: 'eCommerce & Marketplace Solutions', items: ['Amazon, eBay, Etsy & Walmart Store Setup','Shopify, WooCommerce & Wix Stores', 'Product Listings & Optimization', 'Payment Gateways & Inventory Management', ] },
+      { title: 'eCommerce & Marketplace Solutions', items: ['Amazon, eBay, Etsy & Walmart Store Setup','Shopify, WooCommerce & Wix Stores', 'Product Listings & Optimization', 'Payment Gateways & Inventory Management'] },
     ],
     'Who We Help': [
       { title: 'Industries', items: ['E-commerce Brands', 'Startups & SMBs', 'Healthcare', 'Real Estate'] },
@@ -749,25 +786,7 @@ export default function Header() {
     }),
   };
 
-  // Main menu navigation (top-level pages)
-  const handleMainMenuClick = (menu: string) => {
-    if (menu === 'What We Do') router.push('/services');
-    else if (menu === 'Who We Are') router.push('/about');
-    else if (menu === 'Who We Help') router.push('/clients');
-    else if (menu === 'How We Deliver') router.push('/process');
-  };
-
-  // Portfolio navigation
-  const handlePortfolioClick = () => {
-    router.push('/portfolio');
-  };
-
-  // Contact Us navigation
-  const handleContactUsClick = () => {
-    router.push('/contact-us');
-  };
-
-  // Sub-menu handlers
+  // ─── Submenu navigation handlers (these DO change route/hash) ───
   const handleServicesSubmenuClick = (tabId: string) => {
     const target = `/services#${tabId}`;
     if (pathname === '/services') {
@@ -808,17 +827,18 @@ export default function Header() {
     return aboutColumnMapping[columnTitle] || 'company';
   };
 
-  // Logo click → go to home page
-  const handleLogoClick = () => {
-    router.push('/');
-  };
+  // Logo → Home
+  const handleLogoClick = () => router.push('/');
+
+  // Portfolio & Contact buttons
+  const handlePortfolioClick = () => router.push('/portfolio');
+  const handleContactUsClick = () => router.push('/contact-us');
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+    <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4">
-        {/* Left: Logo + Theme Toggle */}
+        {/* Logo + Theme Toggle */}
         <div className="flex items-center gap-5 lg:gap-20">
-          {/* Clickable Logo – works perfectly on mobile & desktop */}
           <motion.button
             onClick={handleLogoClick}
             className="p-2 -m-2 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fec107]"
@@ -826,28 +846,30 @@ export default function Header() {
             whileTap={{ scale: 0.95 }}
             aria-label="Go to homepage"
           >
-            <Image
-              src="/logo.png"
-              alt="DPWebz Logo"
-              width={60}
-              height={60}
-              priority
-            />
+            <Image src="/logo.png" alt="DPWebz Logo" width={90} height={90} priority />
           </motion.button>
 
-          {/* Theme Toggle (hidden on very small screens) */}
           <motion.button
-            className="hidden sm:flex items-center justify-start w-12 h-6 rounded-full bg-gray-200 relative pl-1"
+            onClick={toggleTheme}
+            className="hidden sm:flex relative w-12 h-6 rounded-full bg-gray-200 dark:bg-gray-700 cursor-pointer"
             whileTap={{ scale: 0.95 }}
             aria-label="Toggle theme"
           >
-            <motion.div className="w-5 h-5 rounded-full bg-white shadow-md flex items-center justify-center">
-              <Sun size={12} className="text-gray-600" />
+            <motion.div
+              className="absolute left-1 top-1 w-5 h-5 rounded-full bg-white dark:bg-gray-100 shadow-md flex items-center justify-center transition-transform duration-300"
+              animate={{ x: theme === 'dark' ? 24 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {theme === 'light' ? (
+                <Sun size={12} className="text-[#fec107]" />
+              ) : (
+                <Moon size={12} className="text-[#fec107]" />
+              )}
             </motion.div>
           </motion.button>
         </div>
 
-        {/* Desktop Navigation */}
+        {/* ─── DESKTOP MENU ─── */}
         <ul className="hidden lg:flex gap-8 items-center mx-auto">
           {Object.keys(menuItems).map((menu, index) => (
             <li
@@ -856,9 +878,10 @@ export default function Header() {
               onMouseEnter={() => setOpenMenu(menu)}
               onMouseLeave={() => setOpenMenu(null)}
             >
+              {/* Main menu item → only toggles dropdown */}
               <motion.div
-                className="flex items-center gap-2 font-medium text-sm hover:text-[#fec107] transition-colors py-2 cursor-pointer"
-                onClick={() => handleMainMenuClick(menu)}
+                className="flex items-center gap-2 font-medium text-gray-900 dark:text-gray-100 text-sm hover:text-[#fec107] transition-colors py-2 cursor-pointer"
+                onClick={() => setOpenMenu(openMenu === menu ? null : menu)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -875,33 +898,28 @@ export default function Header() {
                     animate="visible"
                     exit="exit"
                     variants={menuVariants}
-                    className={`absolute top-full mt-2 bg-gray-50 border border-gray-200 rounded-xl p-8 shadow-lg w-[80vw] max-w-[800px] ${
+                    className={`absolute top-full mt-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-8 shadow-lg w-[80vw] max-w-[800px] ${
                       index === Object.keys(menuItems).length - 1 ? 'right-0' : 'left-0'
                     }`}
                   >
                     <div className="grid grid-cols-3 gap-8">
                       {menuItems[menu].map((column, idx) => {
-                        // What We Do
                         if (menu === 'What We Do') {
                           const tabId = servicesTabMapping[column.title];
                           return (
-                            <motion.div key={idx} custom={idx} initial="hidden" animate="visible" variants={itemVariants}>
-                              <button onClick={() => handleServicesSubmenuClick(tabId)} className="text-left w-full">
-                                <h3 className="text-[#fec107] text-sm font-semibold uppercase tracking-widest mb-4 hover:text-red-600 transition-colors">
-                                  {column.title}
-                                </h3>
-                              </button>
+                            <motion.div key={idx} custom={idx} variants={itemVariants}>
+                              <h3 className="text-[#fec107] text-sm font-semibold uppercase tracking-widest mb-4">
+                                {column.title}
+                              </h3>
                               <ul className="space-y-0.5">
                                 {column.items.map((item, iIdx) => (
-                                  <motion.li key={iIdx} custom={iIdx} initial="hidden" animate="visible" variants={itemVariants}>
+                                  <motion.li key={iIdx} custom={iIdx} variants={itemVariants}>
                                     <button
                                       onClick={() => handleServicesSubmenuClick(tabId)}
-                                      className="flex items-center gap-2 w-full text-left py-1 transition-colors"
+                                      className="flex items-center gap-2 w-full text-left py-1 transition-colors hover:text-gray-900 dark:hover:text-gray-100 text-sm text-gray-700 dark:text-gray-300"
                                     >
-                                      <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
-                                      <span className="text-gray-700 hover:text-black text-sm hover:pl-1 transition-all">
-                                        {item}
-                                      </span>
+                                      <div className="w-1.5 h-1.5 bg-[#fec107] rounded-full flex-shrink-0" />
+                                      <span className="hover:pl-1 transition-all">{item}</span>
                                     </button>
                                   </motion.li>
                                 ))}
@@ -910,29 +928,24 @@ export default function Header() {
                           );
                         }
 
-                        // Who We Are
                         if (menu === 'Who We Are') {
                           const colId = aboutColumnMapping[column.title] || 'company';
                           return (
-                            <motion.div key={idx} custom={idx} initial="hidden" animate="visible" variants={itemVariants}>
-                              <button onClick={() => handleAboutSubmenuClick(colId)} className="text-left w-full">
-                                <h3 className="text-[#fec107] text-sm font-semibold uppercase tracking-widest mb-4 hover:text-teal-600 transition-colors">
-                                  {column.title}
-                                </h3>
-                              </button>
+                            <motion.div key={idx} custom={idx} variants={itemVariants}>
+                              <h3 className="text-[#fec107] text-sm font-semibold uppercase tracking-widest mb-4">
+                                {column.title}
+                              </h3>
                               <ul className="space-y-0.5">
                                 {column.items.map((item, iIdx) => {
                                   const itemId = getAboutTabId(column.title, item);
                                   return (
-                                    <motion.li key={iIdx} custom={iIdx} initial="hidden" animate="visible" variants={itemVariants}>
+                                    <motion.li key={iIdx} custom={iIdx} variants={itemVariants}>
                                       <button
                                         onClick={() => handleAboutSubmenuClick(itemId)}
-                                        className="flex items-center gap-2 w-full text-left py-1 transition-colors"
+                                        className="flex items-center gap-2 w-full text-left py-1 transition-colors hover:text-gray-900 dark:hover:text-gray-100 text-sm text-gray-700 dark:text-gray-300"
                                       >
-                                        <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
-                                        <span className="text-gray-700 hover:text-black text-sm hover:pl-1 transition-all">
-                                          {item}
-                                        </span>
+                                        <div className="w-1.5 h-1.5 bg-[#fec107] rounded-full flex-shrink-0" />
+                                        <span className="hover:pl-1 transition-all">{item}</span>
                                       </button>
                                     </motion.li>
                                   );
@@ -942,27 +955,22 @@ export default function Header() {
                           );
                         }
 
-                        // Who We Help
                         if (menu === 'Who We Help') {
                           const colId = clientsColumnMapping[column.title] || 'industries';
                           return (
-                            <motion.div key={idx} custom={idx} initial="hidden" animate="visible" variants={itemVariants}>
-                              <button onClick={() => handleClientsSubmenuClick(colId)} className="text-left w-full">
-                                <h3 className="text-[#fec107] text-sm font-semibold uppercase tracking-widest mb-4 hover:text-purple-600 transition-colors">
-                                  {column.title}
-                                </h3>
-                              </button>
+                            <motion.div key={idx} custom={idx} variants={itemVariants}>
+                              <h3 className="text-[#fec107] text-sm font-semibold uppercase tracking-widest mb-4">
+                                {column.title}
+                              </h3>
                               <ul className="space-y-0.5">
                                 {column.items.map((item, iIdx) => (
-                                  <motion.li key={iIdx} custom={iIdx} initial="hidden" animate="visible" variants={itemVariants}>
+                                  <motion.li key={iIdx} custom={iIdx} variants={itemVariants}>
                                     <button
                                       onClick={() => handleClientsSubmenuClick(colId)}
-                                      className="flex items-center gap-2 w-full text-left py-1 transition-colors"
+                                      className="flex items-center gap-2 w-full text-left py-1 transition-colors hover:text-gray-900 dark:hover:text-gray-100 text-sm text-gray-700 dark:text-gray-300"
                                     >
-                                      <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
-                                      <span className="text-gray-700 hover:text-black text-sm hover:pl-1 transition-all">
-                                        {item}
-                                      </span>
+                                      <div className="w-1.5 h-1.5 bg-[#fec107] rounded-full flex-shrink-0" />
+                                      <span className="hover:pl-1 transition-all">{item}</span>
                                     </button>
                                   </motion.li>
                                 ))}
@@ -971,27 +979,22 @@ export default function Header() {
                           );
                         }
 
-                        // How We Deliver
                         if (menu === 'How We Deliver') {
                           const colId = processColumnMapping[column.title] || 'our-process';
                           return (
-                            <motion.div key={idx} custom={idx} initial="hidden" animate="visible" variants={itemVariants}>
-                              <button onClick={() => handleProcessSubmenuClick(colId)} className="text-left w-full">
-                                <h3 className="text-[#fec107] text-sm font-semibold uppercase tracking-widest mb-4 hover:text-indigo-600 transition-colors">
-                                  {column.title}
-                                </h3>
-                              </button>
+                            <motion.div key={idx} custom={idx} variants={itemVariants}>
+                              <h3 className="text-[#fec107] text-sm font-semibold uppercase tracking-widest mb-4">
+                                {column.title}
+                              </h3>
                               <ul className="space-y-0.5">
                                 {column.items.map((item, iIdx) => (
-                                  <motion.li key={iIdx} custom={iIdx} initial="hidden" animate="visible" variants={itemVariants}>
+                                  <motion.li key={iIdx} custom={iIdx} variants={itemVariants}>
                                     <button
                                       onClick={() => handleProcessSubmenuClick(colId)}
-                                      className="flex items-center gap-2 w-full text-left py-1 transition-colors"
+                                      className="flex items-center gap-2 w-full text-left py-1 transition-colors hover:text-gray-900 dark:hover:text-gray-100 text-sm text-gray-700 dark:text-gray-300"
                                     >
-                                      <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
-                                      <span className="text-gray-700 hover:text-black text-sm hover:pl-1 transition-all">
-                                        {item}
-                                      </span>
+                                      <div className="w-1.5 h-1.5 bg-[#fec107] rounded-full flex-shrink-0" />
+                                      <span className="hover:pl-1 transition-all">{item}</span>
                                     </button>
                                   </motion.li>
                                 ))}
@@ -1010,7 +1013,7 @@ export default function Header() {
           ))}
         </ul>
 
-        {/* Desktop Right Side: CTAs + Language */}
+        {/* Desktop Right Side */}
         <div className="hidden lg:flex items-center gap-4">
           <motion.button
             onClick={handleContactUsClick}
@@ -1029,12 +1032,9 @@ export default function Header() {
             Portfolio
           </motion.button>
 
-          {/* Desktop Language Dropdown */}
+          {/* Language Dropdown */}
           <div className="relative" onMouseEnter={() => setLanguageDropdownOpen(true)} onMouseLeave={() => setLanguageDropdownOpen(false)}>
-            <motion.button
-              className="flex items-center gap-2 font-medium text-sm hover:text-[#fec107] py-2"
-              whileHover={{ scale: 1.05 }}
-            >
+            <motion.button className="flex items-center gap-2 font-medium text-gray-900 dark:text-gray-100 text-sm hover:text-[#fec107] py-2" whileHover={{ scale: 1.05 }}>
               {selectedLanguage}
               <motion.div animate={{ rotate: languageDropdownOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
                 <ChevronDown size={16} />
@@ -1047,7 +1047,7 @@ export default function Header() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-full right-0 mt-2 bg-gray-50 border border-gray-200 rounded-lg shadow-lg min-w-[180px] overflow-hidden"
+                  className="absolute top-full right-0 mt-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg min-w-[180px] overflow-hidden"
                 >
                   {languages.map((lang) => (
                     <motion.button
@@ -1056,8 +1056,8 @@ export default function Header() {
                         setSelectedLanguage(lang);
                         setLanguageDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-                        selectedLanguage === lang ? 'bg-[#fec107] text-black font-semibold' : 'text-gray-700 hover:bg-gray-100'
+                      className={`w-full text-left px-4 py-2 text-sm transition-colors text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                        selectedLanguage === lang ? 'bg-[#fec107] text-black font-semibold' : ''
                       }`}
                       whileHover={{ x: 4 }}
                     >
@@ -1070,13 +1070,12 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Right Side: Language + Hamburger */}
+        {/* Mobile Right: Language + Hamburger */}
         <div className="lg:hidden flex items-center gap-3">
-          {/* Mobile Language */}
           <div className="relative">
             <motion.button
               onClick={() => setLanguageDropdownOpen(!languageDropdownOpen)}
-              className="flex items-center gap-1 text-sm font-medium"
+              className="flex items-center gap-1 text-gray-900 dark:text-gray-100 text-sm font-medium"
               whileTap={{ scale: 0.95 }}
             >
               {selectedLanguage.split(' ')[0]}
@@ -1089,7 +1088,7 @@ export default function Header() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-full right-0 mt-2 bg-gray-50 border border-gray-200 rounded-lg shadow-lg min-w-[150px] z-50"
+                  className="absolute top-full right-0 mt-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg min-w-[150px] z-50"
                 >
                   {languages.map((lang) => (
                     <button
@@ -1098,8 +1097,8 @@ export default function Header() {
                         setSelectedLanguage(lang);
                         setLanguageDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 text-sm ${
-                        selectedLanguage === lang ? 'bg-[#fec107] text-black font-semibold' : 'text-gray-700 hover:bg-gray-100'
+                      className={`w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                        selectedLanguage === lang ? 'bg-[#fec107] text-black font-semibold' : ''
                       }`}
                     >
                       {lang}
@@ -1110,7 +1109,6 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
-          {/* Hamburger Menu */}
           <motion.button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             whileTap={{ scale: 0.95 }}
@@ -1118,17 +1116,17 @@ export default function Header() {
           >
             <div className="flex flex-col gap-1.5">
               <motion.span
-                className="w-6 h-0.5 bg-black rounded-full block"
+                className="w-6 h-0.5 bg-black dark:bg-white rounded-full block"
                 animate={mobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
                 transition={{ duration: 0.3 }}
               />
               <motion.span
-                className="w-6 h-0.5 bg-black rounded-full block"
+                className="w-6 h-0.5 bg-black dark:bg-white rounded-full block"
                 animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
                 transition={{ duration: 0.3 }}
               />
               <motion.span
-                className="w-6 h-0.5 bg-black rounded-full block"
+                className="w-6 h-0.5 bg-black dark:bg-white rounded-full block"
                 animate={mobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
                 transition={{ duration: 0.3 }}
               />
@@ -1137,7 +1135,7 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* ─── MOBILE MENU ─── */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -1145,20 +1143,21 @@ export default function Header() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-gray-50 border-t border-gray-200"
+            className="lg:hidden bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700"
           >
             <div className="p-6 space-y-6">
               {Object.keys(menuItems).map((menu) => (
                 <div key={menu}>
+                  {/* Main item → only toggle submenu */}
                   <button
-                    onClick={() => {
-                      handleMainMenuClick(menu);
-                      setOpenMenu(openMenu === menu ? null : menu);
-                    }}
-                    className="w-full text-left font-medium flex items-center justify-between py-3 hover:text-[#fec107] transition-colors"
+                    onClick={() => setOpenMenu(openMenu === menu ? null : menu)}
+                    className="w-full text-left font-medium text-gray-900 dark:text-gray-100 flex items-center justify-between py-3 hover:text-[#fec107] transition-colors"
                   >
                     {menu}
-                    <ChevronDown size={16} className={`transition-transform duration-300 ${openMenu === menu ? 'rotate-180' : ''}`} />
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-300 ${openMenu === menu ? 'rotate-180' : ''}`}
+                    />
                   </button>
 
                   <AnimatePresence>
@@ -1167,100 +1166,96 @@ export default function Header() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="pl-4 mt-2 space-y-4"
+                        className="pl-4 mt-2 space-y-6"
                       >
                         {menuItems[menu].map((column, idx) => {
                           if (menu === 'What We Do') {
                             const tabId = servicesTabMapping[column.title];
                             return (
-                              <div key={idx} className="space-y-0.5">
-                                <button onClick={() => handleServicesSubmenuClick(tabId)} className="block text-left">
-                                  <p className="text-[#fec107] text-xs font-semibold uppercase tracking-widest mb-2">{column.title}</p>
-                                </button>
+                              <div key={idx} className="space-y-1">
+                                <p className="text-[#fec107] text-xs font-semibold uppercase tracking-widest mb-2">
+                                  {column.title}
+                                </p>
                                 {column.items.map((item) => (
                                   <button
                                     key={item}
                                     onClick={() => handleServicesSubmenuClick(tabId)}
-                                    className="flex items-center gap-2 text-gray-700 hover:text-black text-sm py-1 text-left w-full transition-colors"
+                                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-sm py-1 w-full text-left"
                                   >
-                                    <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
-                                    <span className="hover:pl-1 transition-all">
-                                      {item}
-                                    </span>
+                                    <div className="w-1.5 h-1.5 bg-[#fec107] rounded-full flex-shrink-0" />
+                                    <span className="hover:pl-1 transition-all">{item}</span>
                                   </button>
                                 ))}
                               </div>
                             );
                           }
+
                           if (menu === 'Who We Are') {
                             const colId = aboutColumnMapping[column.title] || 'company';
                             return (
-                              <div key={idx} className="space-y-0.5">
-                                <button onClick={() => handleAboutSubmenuClick(colId)} className="block text-left">
-                                  <p className="text-[#fec107] text-xs font-semibold uppercase tracking-widest mb-2">{column.title}</p>
-                                </button>
+                              <div key={idx} className="space-y-1">
+                                <p className="text-[#fec107] text-xs font-semibold uppercase tracking-widest mb-2">
+                                  {column.title}
+                                </p>
                                 {column.items.map((item) => {
                                   const itemId = getAboutTabId(column.title, item);
                                   return (
                                     <button
                                       key={item}
                                       onClick={() => handleAboutSubmenuClick(itemId)}
-                                      className="flex items-center gap-2 text-gray-700 hover:text-black text-sm py-1 text-left w-full transition-colors"
+                                      className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-sm py-1 w-full text-left"
                                     >
-                                      <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
-                                      <span className="hover:pl-1 transition-all">
-                                        {item}
-                                      </span>
+                                      <div className="w-1.5 h-1.5 bg-[#fec107] rounded-full flex-shrink-0" />
+                                      <span className="hover:pl-1 transition-all">{item}</span>
                                     </button>
                                   );
                                 })}
                               </div>
                             );
                           }
+
                           if (menu === 'Who We Help') {
                             const colId = clientsColumnMapping[column.title] || 'industries';
                             return (
-                              <div key={idx} className="space-y-0.5">
-                                <button onClick={() => handleClientsSubmenuClick(colId)} className="block text-left">
-                                  <p className="text-[#fec107] text-xs font-semibold uppercase tracking-widest mb-2">{column.title}</p>
-                                </button>
+                              <div key={idx} className="space-y-1">
+                                <p className="text-[#fec107] text-xs font-semibold uppercase tracking-widest mb-2">
+                                  {column.title}
+                                </p>
                                 {column.items.map((item) => (
                                   <button
                                     key={item}
                                     onClick={() => handleClientsSubmenuClick(colId)}
-                                    className="flex items-center gap-2 text-gray-700 hover:text-black text-sm py-1 text-left w-full transition-colors"
+                                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-sm py-1 w-full text-left"
                                   >
-                                    <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
-                                    <span className="hover:pl-1 transition-all">
-                                      {item}
-                                    </span>
+                                    <div className="w-1.5 h-1.5 bg-[#fec107] rounded-full flex-shrink-0" />
+                                    <span className="hover:pl-1 transition-all">{item}</span>
                                   </button>
                                 ))}
                               </div>
                             );
                           }
+
                           if (menu === 'How We Deliver') {
                             const colId = processColumnMapping[column.title] || 'our-process';
                             return (
-                              <div key={idx} className="space-y-0.5">
-                                <button onClick={() => handleProcessSubmenuClick(colId)} className="block text-left">
-                                  <p className="text-[#fec107] text-xs font-semibold uppercase tracking-widest mb-2">{column.title}</p>
-                                </button>
+                              <div key={idx} className="space-y-1">
+                                <p className="text-[#fec107] text-xs font-semibold uppercase tracking-widest mb-2">
+                                  {column.title}
+                                </p>
                                 {column.items.map((item) => (
                                   <button
                                     key={item}
                                     onClick={() => handleProcessSubmenuClick(colId)}
-                                    className="flex items-center gap-2 text-gray-700 hover:text-black text-sm py-1 text-left w-full transition-colors"
+                                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-sm py-1 w-full text-left"
                                   >
-                                    <div className="flex-shrink-0 w-1.5 h-1.5 bg-[#fec107] rounded-full"></div>
-                                    <span className="hover:pl-1 transition-all">
-                                      {item}
-                                    </span>
+                                    <div className="w-1.5 h-1.5 bg-[#fec107] rounded-full flex-shrink-0" />
+                                    <span className="hover:pl-1 transition-all">{item}</span>
                                   </button>
                                 ))}
                               </div>
                             );
                           }
+
                           return null;
                         })}
                       </motion.div>
@@ -1269,6 +1264,7 @@ export default function Header() {
                 </div>
               ))}
 
+              {/* Mobile CTAs */}
               <div className="pt-4 space-y-3">
                 <motion.button
                   onClick={handleContactUsClick}
